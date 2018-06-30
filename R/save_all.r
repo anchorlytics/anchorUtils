@@ -13,9 +13,9 @@
 #' # relative to project root
 #' save_all(c("mtcars", "letters"), "data", "rds")
 save_all <- function(.list, ...) {
-  path = list(...)
+  rdsdir = here(...)
   .list %>%
-    map(~list(get(.), here(path, paste0(., ".rds")))) %>%
+    map(~list(get(.), file.path(rdsdir, paste0(., ".rds")))) %>%
     transpose() %>%
     pwalk(saveRDS)
 }
@@ -33,10 +33,10 @@ save_all <- function(.list, ...) {
 #' # relative to project root
 #' read_all(c("mtcars", "letters"), "data", "rds")
 read_all <- function(.list, ...) {
-  path = list(...)
+  rdsdir = here(...)
   .list %>%
     set_names %>%
-    map(~here(path, paste0(., ".rds") )) %>%
+    map(~file.path(rdsdir, paste0(., ".rds") )) %>%
     map(readRDS) %>%
     iwalk(~assign(.y, .x, .GlobalEnv))
 }
