@@ -1,0 +1,11 @@
+Package: anchorUtils
+Type: Package
+Title: Helper functions for workflow
+Version: 0.1.0
+Author: Sean Ho, Anchorlytics Consulting
+Maintainer: Sean Ho <anchor@seanho.com>
+Description: In-house utility functions for 
+    Anchorlytics Consulting
+License: MIT
+Encoding: UTF-8
+LazyData: true
