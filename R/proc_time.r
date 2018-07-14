@@ -8,9 +8,6 @@
 #' @examples
 #' fmt.proc_time(system.time(rnorm(1e7)))
 fmt.proc_time <- function(pt) {
-  library(tidyverse)
-  library(lubridate)
-
   pt_per <- pt %>%
     as.list() %>%
     .$elapsed %>%
