@@ -11,7 +11,7 @@
 #' @examples
 #' # Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
 #' # relative to project root
-save_all(c("mtcars", "letters"), "data", "rds")
+#' save_all(c("mtcars", "letters"), "data", "rds")
 save_all <- function(.list, ...) {
   rdsdir = here::here(...)
   vars = .list
