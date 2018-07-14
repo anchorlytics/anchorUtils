@@ -17,8 +17,7 @@ save_all <- function(.list, ...) {
   vars = .list
   objs = purrr::map(vars, get)
   paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
-  purrr::map2(objs, paths, saveRDS)
-  invisible()
+  purrr::walk2(objs, paths, saveRDS)
 }
 
 #' Load multiple RDS files into current environment
@@ -30,14 +29,13 @@ save_all <- function(.list, ...) {
 #' @export
 #'
 #' @examples
-#' # Reads from "data/rds/mtcars.rds" and "data/rds/letters.rds"
+#' # Reads from "data/rds/my_mtcars.rds" and "data/rds/my_letters.rds"
 #' # relative to project root
-#' read_all(c("mtcars", "letters"), "data", "rds")
+#' read_all(c("my_mtcars", "my_letters"), "data", "rds")
 read_all <- function(.list, ...) {
   rdsdir = here::here(...)
   vars = .list
   paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
   objs = purrr::map(paths, readRDS)
-  purrr::map2(objs, vars, assign, .GlobalEnv)
-  invisible()
+  purrr::walk2(vars, objs, assign, .GlobalEnv)
 }
