@@ -1,25 +1,21 @@
 #' Pretty-print a proc_time object
 #'
-#' @param pt A proc_time object, e.g., from system.time()
+#' @param .pt A proc_time object, e.g., from system.time()
 #'
 #' @return A formatted string.
-#' @importFrom magrittr %>% set_names
-#' @importFrom purrr map imap
 #' @export
 #'
 #' @examples
 #' fmt.proc_time(system.time(rnorm(1e7)))
-fmt.proc_time <- function(pt) {
-  pt_per <- pt %>%
-    as.list() %>%
-    .$elapsed %>%
-    lubridate::seconds_to_period()
+fmt.proc_time <- function(.pt) {
+  pt_sec = as.list(.pt)$elapsed
+  pt_per = lubridate::seconds_to_period(pt_sec)
 
-  c("day", "hour", "minute", "second") %>%
-    set_names() %>%
-    map(get, asNamespace("lubridate")) %>%
-    map(do.call, list(pt_per)) %>%
-    .[.>0] %>%
-    imap(~sprintf("%d %ss", floor(.x), .y)) %>%
-    paste(collapse = " ")
+  units = c("day", "hour", "minute", "second")
+  names(units) = units
+  units_funs = purrr::map(units, get, asNamespace("lubridate"))
+  units_call = purrr::map(units_funs, do.call, list(pt_per))
+  units_pos = units_call[ units_call > 0 ]
+  units_fmt = purrr::imap(units_pos, ~sprintf("%d %ss", floor(.x), .y))
+  paste(units_fmt, collapse = " ")
 }

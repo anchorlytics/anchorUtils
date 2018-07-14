@@ -6,20 +6,19 @@
 #' @param ... path components relative to project root
 #'
 #' @return
-#' @importFrom magrittr %>%
-#' @importFrom purrr map transpose pwalk iwalk
 #' @export
 #'
 #' @examples
 #' # Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
 #' # relative to project root
-#' save_all(c("mtcars", "letters"), "data", "rds")
+save_all(c("mtcars", "letters"), "data", "rds")
 save_all <- function(.list, ...) {
   rdsdir = here::here(...)
-  .list %>%
-    map(~list(get(.), file.path(rdsdir, paste0(., ".rds")))) %>%
-    transpose() %>%
-    pwalk(saveRDS)
+  vars = .list
+  objs = purrr::map(vars, get)
+  paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
+  purrr::map2(objs, paths, saveRDS)
+  invisible()
 }
 
 #' Load multiple RDS files into current environment
@@ -36,9 +35,9 @@ save_all <- function(.list, ...) {
 #' read_all(c("mtcars", "letters"), "data", "rds")
 read_all <- function(.list, ...) {
   rdsdir = here::here(...)
-  .list %>%
-    set_names %>%
-    map(~file.path(rdsdir, paste0(., ".rds") )) %>%
-    map(readRDS) %>%
-    iwalk(~assign(.y, .x, .GlobalEnv))
+  vars = .list
+  paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
+  objs = purrr::map(paths, readRDS)
+  purrr::map2(objs, vars, assign, .GlobalEnv)
+  invisible()
 }
