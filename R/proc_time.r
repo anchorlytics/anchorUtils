@@ -3,6 +3,8 @@
 #' @param pt A proc_time object, e.g., from system.time()
 #'
 #' @return A formatted string.
+#' @importFrom magrittr %>% set_names
+#' @importFrom purrr map imap
 #' @export
 #'
 #' @examples
@@ -11,10 +13,11 @@ fmt.proc_time <- function(pt) {
   pt_per <- pt %>%
     as.list() %>%
     .$elapsed %>%
-    seconds_to_period()
+    lubridate::seconds_to_period()
 
   c("day", "hour", "minute", "second") %>%
     set_names() %>%
+    map(get, asNamespace("lubridate")) %>%
     map(do.call, list(pt_per)) %>%
     .[.>0] %>%
     imap(~sprintf("%d %ss", floor(.x), .y)) %>%

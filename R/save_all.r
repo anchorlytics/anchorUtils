@@ -6,6 +6,8 @@
 #' @param ... path components relative to project root
 #'
 #' @return
+#' @importFrom magrittr %>%
+#' @importFrom purrr map transpose pwalk iwalk
 #' @export
 #'
 #' @examples
@@ -13,7 +15,7 @@
 #' # relative to project root
 #' save_all(c("mtcars", "letters"), "data", "rds")
 save_all <- function(.list, ...) {
-  rdsdir = here(...)
+  rdsdir = here::here(...)
   .list %>%
     map(~list(get(.), file.path(rdsdir, paste0(., ".rds")))) %>%
     transpose() %>%
@@ -33,7 +35,7 @@ save_all <- function(.list, ...) {
 #' # relative to project root
 #' read_all(c("mtcars", "letters"), "data", "rds")
 read_all <- function(.list, ...) {
-  rdsdir = here(...)
+  rdsdir = here::here(...)
   .list %>%
     set_names %>%
     map(~file.path(rdsdir, paste0(., ".rds") )) %>%
