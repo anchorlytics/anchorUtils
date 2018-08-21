@@ -5,7 +5,6 @@
 #' @param .list character vector of names of objects in environment
 #' @param ... path components relative to project root
 #'
-#' @return
 #' @export
 #'
 #' @examples
@@ -25,7 +24,7 @@ save_all <- function(.list, ...) {
 #' @param .list character vector of names
 #' @param ... path components relative to project root
 #'
-#' @return
+#' @return None, global environment is modified
 #' @export
 #'
 #' @examples
