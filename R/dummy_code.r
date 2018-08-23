@@ -22,7 +22,7 @@
 #'   If omitted, all variables are considered.
 #'
 #' @return A tibble with selected factors converted to 0/1 dummy variables
-#' @importFrom dplyr %>% quos select select_if one_of as_tibble
+#' @importFrom dplyr %>% quos select select_if one_of as_tibble mutate_all
 #' @export
 #'
 #' @examples
@@ -44,12 +44,14 @@ dummy_code <- function(.data, ...) {
 
   .data %>%
     select(-one_of(noms)) %>%
-    cbind(
+    bind_cols(
       select(.data, one_of(noms)) %>%
+        model.frame(~., ., na.action = "na.pass") %>%
         model.matrix(
           ~.-1, data = .,
           contrasts.arg = lapply(., contrasts, contrasts = FALSE)
-        )
-    ) %>%
-    as_tibble()
+        ) %>%
+        as_tibble() %>%
+        mutate_all(as.integer)
+    )
 }
