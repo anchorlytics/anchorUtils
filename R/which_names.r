@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @examples
-array_which <- function(.a, dimnames = NULL, ...) {
+which_names <- function(.a, dimnames = NULL, ...) {
   if (!is.null(dimnames)) {
     dimnames(.a) <- dimnames
   }
