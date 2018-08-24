@@ -113,7 +113,6 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' @return data frame, potentially with fewer columns
 #'
 #' @export
-#' @importFrom dplyr select one_of
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -121,7 +120,7 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' drop_nzv(mtcars, freqCut = 1.4)
 # TODO: remove dependency on caret
 drop_nzv <- function(.data, ...) {
-  nzv <- caret::nearZeroVar(.data, names = TRUE, ...)
-  select(.data, -one_of(nzv))
+  nzv <- caret::nearZeroVar(.data, ...)
+  .data[-1*nzv]
 }
 
