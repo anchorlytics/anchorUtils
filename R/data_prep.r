@@ -88,8 +88,9 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
   mutate_if(
     .data,
     ~is.factor(.) & is.ordered(.) & nlevels(.) > maxlev,
-    ~as.integer(levels(.))[.] %>%
-      cut(newlev, labels = 1:newlev, ordered_result = TRUE))
+    ~cut(as.integer(levels(.))[.],
+         newlev, labels = 1:newlev, ordered_result = TRUE)
+  )
 }
 
 #' Near-Zero Variance filter
