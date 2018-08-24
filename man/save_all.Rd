@@ -4,12 +4,15 @@
 \alias{save_all}
 \title{Save multiple objects as RDS files}
 \usage{
-save_all(.list, ...)
+save_all(.list, rdsdir = NULL, ...)
 }
 \arguments{
 \item{.list}{character vector of names of objects in environment}
 
-\item{...}{path components relative to project root}
+\item{rdsdir}{path to directory, passed to [base::file.path()].
+If not specified, [base::tempdir()].}
+
+\item{...}{additional options passed to [base::saveRDS()]}
 }
 \value{
 None, global environment is modified
@@ -18,9 +21,11 @@ None, global environment is modified
 Save multiple objects as RDS files
 }
 \examples{
-# Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
-# relative to project root
-save_all(c("mtcars", "letters"), "data", "rds")
+# Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
+my_mtcars <- mtcars; my_letters <- letters
+save_all(c("my_mtcars", "my_letters"))
+rm(my_mtcars, my_letters)
+read_all(c("my_mtcars", "my_letters"))
 }
 \seealso{
 Other Saving/loading data: \code{\link{read_all}}

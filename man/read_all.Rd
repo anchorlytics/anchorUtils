@@ -4,12 +4,15 @@
 \alias{read_all}
 \title{Load multiple RDS files into current environment}
 \usage{
-read_all(.list, ...)
+read_all(.list, rdsdir = NULL, ...)
 }
 \arguments{
 \item{.list}{character vector of names}
 
-\item{...}{path components relative to project root}
+\item{rdsdir}{path to directory, passed to [base::file.path()].
+If not specified, [base::tempdir()].}
+
+\item{...}{additional options passed to [base::readRDS()]}
 }
 \value{
 None, global environment is modified
@@ -18,9 +21,11 @@ None, global environment is modified
 Load multiple RDS files into current environment
 }
 \examples{
-# Reads from "data/rds/my_mtcars.rds" and "data/rds/my_letters.rds"
-# relative to project root
-read_all(c("my_mtcars", "my_letters"), "data", "rds")
+# Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
+my_mtcars <- mtcars; my_letters <- letters
+save_all(c("my_mtcars", "my_letters"))
+rm(my_mtcars, my_letters)
+read_all(c("my_mtcars", "my_letters"))
 }
 \seealso{
 Other Saving/loading data: \code{\link{save_all}}
