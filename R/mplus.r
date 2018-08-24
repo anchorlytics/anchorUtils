@@ -3,8 +3,8 @@
 #' Word wrap to accommodate Mplus line length limitations.
 #'
 #' Mplus input syntax is limited to 90 characters on a line.
-#' This wrapper around `stringi::stri_wrap()` takes a character vector,
-#' concatenates it with spaces, and word-wraps the result.
+#' This function takes a character vector, concatenates it with spaces,
+#' and word-wraps the result, returning a single string.
 #'
 #' @param .list a character vector
 #' @param width passed to `stringi::stri_wrap`
@@ -12,31 +12,37 @@
 #' @param whitespace_only passed to `stringi::stri_wrap`
 #' @param ... passed to `stringi::stri_wrap`
 #' @return a single string, potentially with newlines
+#'
 #' @importFrom stringi stri_wrap
-#' @family mplus
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' cat(mp_wordwrap(rownames(mtcars)))
 mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
-			                        ...) {
-	  paste(.list, collapse = " ") %>%
-		      # stringr::str_wrap doesn't expose 'whitespace_only' option
-		      stringi::stri_wrap(
-					       width = width, exdent = exdent, whitespace_only = whitespace_only,
-					             ...) %>%
-	    paste(collapse = "\n")
+                        ...) {
+  paste(.list, collapse = " ") %>%
+    # stringr::str_wrap doesn't expose 'whitespace_only' option
+    stringi::stri_wrap(width = width, exdent = exdent,
+                       whitespace_only = whitespace_only, ...) %>%
+    paste(collapse = "\n")
 }
 
-#' @title Specify ordinal variables to Mplus
-#' @description This creates an Mplus input syntax line indicating which
+#' Specify ordinal variables to Mplus
+#'
+#' This creates an Mplus input syntax line indicating which
 #' variables are ordered categorical.
+#'
 #' @param .data data frame with proper column types
 #' @param ... additional options passed to `mp_wordwrap()``
 #' @return a single string that can be passed to
 #'   `MplusAutomation::mplusObject()` in the `VARIABLE` argument
+#'
 #' @author Sean Ho `<anchor@seanho.com>``
 #' @importFrom dplyr %>% select_if
-#' @family mplus
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
+#'
 #' @examples
 #' library(dplyr)
 #' as_tibble(mtcars) %>%

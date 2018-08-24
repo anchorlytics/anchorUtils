@@ -3,7 +3,9 @@
 #' @param .pt A proc_time object, e.g., from system.time()
 #'
 #' @return A formatted string.
-#' @export
+#' @importFrom purrr map
+#' @importFrom lubridate seconds_to_period
+#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' fmt.proc_time(system.time(rnorm(1e7)))

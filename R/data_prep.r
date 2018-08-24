@@ -1,8 +1,7 @@
 # Helpers for data munging
 
-#' @title Dummy-code (one-hot) factors
+#' Dummy-code (one-hot) factors
 #'
-#' @description
 #' Dummy coding expands a polytomous categorical factor into several
 #' indicator variables, each of which is logical (Boolean, TRUE/FALSE).
 #' The one-hot contrast expands a factor with `L` levels into `L` indicator
@@ -71,8 +70,11 @@ dummy_code <- function(.data, ...) {
 #' @param newlev if collapsing levels, how many levels should the factor have.
 #'   Default is `maxlev`.
 #' @return data frame with same columns
+#'
 #' @importFrom dplyr mutate_if
 #' @family data munging
+#' @author Sean Ho <anchor@seanho.com>
+#'
 #' @examples
 #' library(dplyr)
 #' as_tibble(mtcars) %>%
@@ -93,12 +95,16 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' Removes numeric variables with very little variability.
 #' This can, for instance, aid stability of inverting covariance matrices for
 #' factor analysis.
+#'
 #' @param .data data frame
 #' @param ... other options passed through to `caret::nearZeroVar``
 #' @return data frame, potentially with fewer columns
+#'
 #' @importFrom dplyr select one_of
 #' @importFrom caret nearZeroVar
 #' @family data munging
+#' @author Sean Ho <anchor@seanho.com>
+#'
 #' @examples
 #' drop_nzv(mtcars, freqCut = 1.4)
 drop_nzv <- function(.data, ...) {

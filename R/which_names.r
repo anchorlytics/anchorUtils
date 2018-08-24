@@ -4,7 +4,7 @@
 #' in an array.
 #' This wrapper uses `dimnames` to return pairs of row/column names.
 #'
-#' @param .a array (could be matrix)
+#' @param .a array
 #' @param dimnames list of character vectors.
 #'   E.g., if `.a` is a matrix, then `length(dimnames) == 2`,
 #'   `dimnames[[1]]` is a vector of row names, and
@@ -14,7 +14,6 @@
 #' @return a tibble of named indices
 #' @importFrom dplyr %>% as_tibble
 #' @importFrom purrr map2
-#' @export
 #'
 #' @examples
 #' which_names(mtcars[1:6, c("vs", "am")] == 1)

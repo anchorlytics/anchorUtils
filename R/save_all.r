@@ -6,7 +6,10 @@
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
-#' @family io
+#' @importFrom here here
+#' @importFrom purrr map walk2
+#' @family Saving/loading data
+#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' # Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
@@ -20,13 +23,16 @@ save_all <- function(.list, ...) {
   purrr::walk2(objs, paths, saveRDS)
 }
 
-#' @title Load multiple RDS files into current environment
+#' Load multiple RDS files into current environment
 #'
 #' @param .list character vector of names
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
-#' @family io
+#' @importFrom here here
+#' @importFrom purrr map walk2
+#' @family Saving/loading data
+#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' # Reads from "data/rds/my_mtcars.rds" and "data/rds/my_letters.rds"
