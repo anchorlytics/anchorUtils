@@ -10,6 +10,7 @@
 #'   `dimnames[[2]]` is a vector of column names.
 #' @param ... Additional options passed to [base::which()].
 #'
+#' @export
 #' @return a data frame of named indices
 #'
 #' @examples

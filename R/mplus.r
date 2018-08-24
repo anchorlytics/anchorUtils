@@ -13,6 +13,7 @@
 #' @param ... passed to [stringi::stri_wrap()]
 #' @return a single string, potentially with newlines
 #'
+#' @export
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -38,6 +39,7 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #' @return a single string that can be passed to
 #'   [MplusAutomation::mplusObject()] in the `VARIABLE` argument
 #'
+#' @export
 #' @importFrom dplyr select_if
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>

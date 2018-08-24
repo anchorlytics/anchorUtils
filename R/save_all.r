@@ -6,6 +6,7 @@
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
+#' @export
 #' @family Saving/loading data
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -27,6 +28,7 @@ save_all <- function(.list, ...) {
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
+#' @export
 #' @family Saving/loading data
 #' @author Sean Ho <anchor@seanho.com>
 #'

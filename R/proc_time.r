@@ -1,8 +1,9 @@
 #' Pretty-print a proc_time object
 #'
 #' @param .pt A proc_time object, e.g., from [base::system.time()]
-#'
 #' @return A formatted string.
+#'
+#' @export
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples

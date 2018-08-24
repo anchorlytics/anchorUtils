@@ -80,6 +80,7 @@ dummy_code <- function(.data, ...) {
 #'   Default is `maxlev`.
 #' @return data frame with same columns
 #'
+#' @export
 #' @importFrom dplyr mutate_if
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
@@ -106,16 +107,17 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' This can, for instance, aid stability of inverting covariance matrices for
 #' factor analysis.
 #'
-#' drop_nzv(mtcars, freqCut = 1.4)
 #' @param .data data frame
 #' @param ... other options passed through to [caret::nearZeroVar()]
 #' @return data frame, potentially with fewer columns
 #'
+#' @export
 #' @importFrom dplyr select one_of
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
+#' drop_nzv(mtcars, freqCut = 1.4)
 # TODO: remove dependency on caret
 drop_nzv <- function(.data, ...) {
   nzv <- caret::nearZeroVar(.data, names = TRUE, ...)
