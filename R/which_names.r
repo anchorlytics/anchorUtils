@@ -10,18 +10,20 @@
 #'   `dimnames[[2]]` is a vector of column names.
 #' @param ... Additional options passed to [base::which()].
 #'
-#' @return a tibble of named indices
-#' @importFrom dplyr %>% as_tibble
-#' @importFrom purrr map2
+#' @return a data frame of named indices
 #'
 #' @examples
 #' which_names(mtcars[1:6, c("vs", "am")] == 1)
+#' which_names(matrix(1:20, nrow = 4) %% 3 == 0)
 which_names <- function(.a, dimnames = NULL, ...) {
-  if (!is.null(dimnames)) {
-    dimnames(.a) <- dimnames
+  if (is.null(dimnames)) {
+    dimnames <- dimnames(.a)
   }
-  which(.a, arr.ind = TRUE, ...) %>%
-    dplyr::as_tibble() %>%
-    purrr::map2(seq_along(.), ~dimnames(.a)[[.y]][.x]) %>%
-    dplyr::as_tibble()
+
+  wh <- as.data.frame(which(.a, arr.ind = TRUE, ...))
+  if (is.null(dimnames)) {
+    return(wh)
+  }
+
+  as.data.frame(mapply(`[`, dimnames, wh))
 }
