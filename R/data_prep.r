@@ -23,6 +23,7 @@
 #'
 #' @return data frame with selected factors converted to logical dummy variables
 #'
+#' @export
 #' @importFrom dplyr quos everything select select_if one_of
 #' @importFrom stats model.frame model.matrix contrasts
 #' @family data munging
