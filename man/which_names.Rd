@@ -23,6 +23,10 @@ a data frame of named indices
 [base::which()] returns numeric indices of TRUE entries in an array.
 This wrapper uses `dimnames` to return pairs of row/column names.
 }
+\details{
+This was originally created to examine correlation matrices for collinearity.
+Then I discovered [corrr::stretch()] and that was much better.
+}
 \examples{
 which_names(mtcars[1:6, c("vs", "am")] == 1)
 which_names(matrix(1:20, nrow = 4) \%\% 3 == 0)
