@@ -17,7 +17,7 @@ E.g., if `.a` is a matrix, then `length(dimnames) == 2`,
 \item{...}{Additional options passed to [base::which()].}
 }
 \value{
-a tibble of named indices
+a data frame of named indices
 }
 \description{
 [base::which()] returns numeric indices of TRUE entries in an array.
@@ -25,4 +25,5 @@ This wrapper uses `dimnames` to return pairs of row/column names.
 }
 \examples{
 which_names(mtcars[1:6, c("vs", "am")] == 1)
+which_names(matrix(1:20, nrow = 4) \%\% 3 == 0)
 }

@@ -7,14 +7,14 @@
 dummy_code(.data, ...)
 }
 \arguments{
-\item{.data}{data frame or tibble}
+\item{.data}{data frame}
 
 \item{...}{One or more unquoted expressions separated by commas,
 as passed to [dplyr::select()].
 If omitted, all variables are considered.}
 }
 \value{
-A tibble with selected factors converted to logical dummy variables
+data frame with selected factors converted to logical dummy variables
 }
 \description{
 Dummy coding expands a polytomous categorical factor into several
@@ -33,8 +33,8 @@ The new indicator variables are appended to the end of the variable list,
 and the original factors are removed.
 }
 \examples{
+library(dplyr)
 mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code()
-
 mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code(-cyl)
 }
 \seealso{

@@ -2,12 +2,12 @@
 % Please edit documentation in R/data_prep.r
 \name{ord_collapse}
 \alias{ord_collapse}
-\title{Compress ordinal factors with too many levels}
+\title{Compress integer ordinal factors with too many levels}
 \usage{
 ord_collapse(.data, maxlev = 10, newlev = maxlev)
 }
 \arguments{
-\item{.data}{data frame with proper column types}
+\item{.data}{data frame with ordinal factors coded as integers}
 
 \item{maxlev}{apply level collapsing only if `nlevels` is greater than this}
 
@@ -22,6 +22,7 @@ Polychoric correlation routines often limit the number of levels an
 ordinal (ordered categorical) factor can have.
 This function is like [forcats::fct_collapse()] but preserves the ordering
 of levels.
+Modified factors are releveled to 1:n.
 }
 \examples{
 library(dplyr)
