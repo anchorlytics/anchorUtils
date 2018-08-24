@@ -1,11 +1,12 @@
 # save and load to/from RDS
 
-#' Save multiple objects as RDS files
+#' @title Save multiple objects as RDS files
 #'
 #' @param .list character vector of names of objects in environment
 #' @param ... path components relative to project root
+#' @return None, global environment is modified
 #'
-#' @export
+#' @family io
 #'
 #' @examples
 #' # Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
@@ -19,13 +20,13 @@ save_all <- function(.list, ...) {
   purrr::walk2(objs, paths, saveRDS)
 }
 
-#' Load multiple RDS files into current environment
+#' @title Load multiple RDS files into current environment
 #'
 #' @param .list character vector of names
 #' @param ... path components relative to project root
-#'
 #' @return None, global environment is modified
-#' @export
+#'
+#' @family io
 #'
 #' @examples
 #' # Reads from "data/rds/my_mtcars.rds" and "data/rds/my_letters.rds"
