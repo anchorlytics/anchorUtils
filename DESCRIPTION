@@ -4,12 +4,12 @@ Title: Helper functions for workflow
 Version: 0.2.0
 Author: Sean Ho, Anchorlytics Consulting
 Maintainer: Sean Ho <anchor@seanho.com>
-Description: In-house utility functions for 
-    Anchorlytics Consulting
-License: MIT
+Description: In-house utility functions for Anchorlytics Consulting.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    stats,
     purrr,
     here,
     lubridate,
