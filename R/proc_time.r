@@ -3,8 +3,6 @@
 #' @param .pt A proc_time object, e.g., from [base::system.time()]
 #'
 #' @return A formatted string.
-#' @importFrom purrr map
-#' @importFrom lubridate seconds_to_period
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples

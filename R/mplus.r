@@ -13,7 +13,6 @@
 #' @param ... passed to [stringi::stri_wrap()]
 #' @return a single string, potentially with newlines
 #'
-#' @importFrom stringi stri_wrap
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -38,7 +37,7 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #' @return a single string that can be passed to
 #'   [MplusAutomation::mplusObject()] in the `VARIABLE` argument
 #'
-#' @importFrom dplyr %>% select_if
+#' @importFrom dplyr select_if
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -52,9 +51,6 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #'   mp_ordinal() %>%
 #'   cat()
 mp_ordinal <- function(.data, ...) {
-  .data %>%
-    select_if(is.ordered) %>%
-    names() %>%
-    c("CATEGORICAL =", ., ";") %>%
-    mp_wordwrap(...)
+  mp_wordwrap(c("CATEGORICAL =", names(select_if(.data, is.ordered)), ";"),
+              ...)
 }

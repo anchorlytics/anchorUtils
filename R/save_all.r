@@ -6,8 +6,6 @@
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
-#' @importFrom here here
-#' @importFrom purrr map walk2
 #' @family Saving/loading data
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -29,8 +27,6 @@ save_all <- function(.list, ...) {
 #' @param ... path components relative to project root
 #' @return None, global environment is modified
 #'
-#' @importFrom here here
-#' @importFrom purrr map walk2
 #' @family Saving/loading data
 #' @author Sean Ho <anchor@seanho.com>
 #'

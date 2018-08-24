@@ -23,11 +23,13 @@
 #'
 #' @return A tibble with selected factors converted to logical dummy variables
 #'
-#' @importFrom dplyr %>% quos select select_if one_of mutate_all as_tibble
+#' @importFrom dplyr %>% quos everything bind_cols select select_if one_of mutate_all as_tibble
+#' @importFrom stats model.frame model.matrix contrasts
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
+#' library(dplyr)
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code()
 #'
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code(-cyl)
@@ -48,10 +50,10 @@ dummy_code <- function(.data, ...) {
     select(-one_of(noms)) %>%
     bind_cols(
       select(.data, one_of(noms)) %>%
-        model.frame(~., ., na.action = "na.pass") %>%
-        model.matrix(
+        stats::model.frame(~., ., na.action = "na.pass") %>%
+        stats::model.matrix(
           ~.-1, data = .,
-          contrasts.arg = lapply(., contrasts, contrasts = FALSE)
+          contrasts.arg = lapply(., stats::contrasts, contrasts = FALSE)
         ) %>%
         as_tibble() %>%
         mutate_all(as.logical)
@@ -96,19 +98,19 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' This can, for instance, aid stability of inverting covariance matrices for
 #' factor analysis.
 #'
+#' drop_nzv(mtcars, freqCut = 1.4)
 #' @param .data data frame
 #' @param ... other options passed through to [caret::nearZeroVar()]
 #' @return data frame, potentially with fewer columns
 #'
 #' @importFrom dplyr select one_of
-#' @importFrom caret nearZeroVar
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
-#' drop_nzv(mtcars, freqCut = 1.4)
+# TODO: remove dependency on caret
 drop_nzv <- function(.data, ...) {
-  nzv <- nearZeroVar(.data, names = TRUE, ...)
+  nzv <- caret::nearZeroVar(.data, names = TRUE, ...)
   select(.data, -one_of(nzv))
 }
 
