@@ -30,7 +30,6 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #' @title Specify ordinal variables to Mplus
 #' @description This creates an Mplus input syntax line indicating which
 #' variables are ordered categorical.
-#' @usage mp_ordinal(.data, ...)
 #' @param .data data frame with proper column types
 #' @param ... additional options passed to `mp_wordwrap()``
 #' @return a single string that can be passed to
