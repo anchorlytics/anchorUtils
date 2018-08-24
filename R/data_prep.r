@@ -1,17 +1,17 @@
 # Helpers for data munging
 
-#' @title Dummy-code (one-hot) factors into multiple indicators
+#' @title Dummy-code (one-hot) factors
 #'
 #' @description
-#' Dummy coding expands a polytomous categorical factor into several variables,
-#' each of which is 0/1.
-#' The one-hot contrast expands a factor with $L$ levels into $L$ indicator
+#' Dummy coding expands a polytomous categorical factor into several
+#' indicator variables, each of which is logical (Boolean, TRUE/FALSE).
+#' The one-hot contrast expands a factor with `L` levels into `L` indicator
 #' variables.  The result is not a full-rank parameterisation,
 #' however it avoids needing to select a reference level.
 #'
 #' Ordinal (ordered categorical) and dichotomous (only 2 levels) variables are
 #' not modified; nor are non-factors (numeric, logical, etc.).
-#' Additional arguments are passed to dplyr::select() to further filter the
+#' Additional arguments are passed to [dplyr::select()] to further filter the
 #' list of variables eligible for dummy coding.
 #'
 #' The new indicator variables are appended to the end of the variable list,
@@ -19,14 +19,14 @@
 #'
 #' @param .data data frame or tibble
 #' @param ... One or more unquoted expressions separated by commas,
-#'   as passed to dplyr::select().
+#'   as passed to [dplyr::select()].
 #'   If omitted, all variables are considered.
 #'
-#' @return A tibble with selected factors converted to 0/1 dummy variables
+#' @return A tibble with selected factors converted to logical dummy variables
 #'
-#' @importFrom dplyr %>% quos select select_if one_of as_tibble mutate_all
-#' @family data
-#' @author Sean Ho `<anchor@seanho.com>`
+#' @importFrom dplyr %>% quos select select_if one_of mutate_all as_tibble
+#' @family data munging
+#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code()
@@ -55,7 +55,7 @@ dummy_code <- function(.data, ...) {
           contrasts.arg = lapply(., contrasts, contrasts = FALSE)
         ) %>%
         as_tibble() %>%
-        mutate_all(as.integer)
+        mutate_all(as.logical)
     )
 }
 
@@ -72,7 +72,7 @@ dummy_code <- function(.data, ...) {
 #'   Default is `maxlev`.
 #' @return data frame with same columns
 #' @importFrom dplyr mutate_if
-#' @family data
+#' @family data munging
 #' @examples
 #' library(dplyr)
 #' as_tibble(mtcars) %>%
@@ -98,7 +98,7 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' @return data frame, potentially with fewer columns
 #' @importFrom dplyr select one_of
 #' @importFrom caret nearZeroVar
-#' @family data
+#' @family data munging
 #' @examples
 #' drop_nzv(mtcars, freqCut = 1.4)
 drop_nzv <- function(.data, ...) {
