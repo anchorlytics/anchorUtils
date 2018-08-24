@@ -12,7 +12,7 @@
 #' @param ... Additional options passed to `base::which()``.
 #'
 #' @return a tibble of named indices
-#' @importFrom dplyr %>% as_tibble()
+#' @importFrom dplyr %>% as_tibble
 #' @importFrom purrr map2
 #' @export
 #'
