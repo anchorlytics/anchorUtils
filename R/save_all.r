@@ -3,7 +3,9 @@
 #' @title Save multiple objects as RDS files
 #'
 #' @param .list character vector of names of objects in environment
-#' @param ... path components relative to project root
+#' @param rdsdir path to directory, passed to [base::file.path()].
+#'   If not specified, [base::tempdir()].
+#' @param ... additional options passed to [base::saveRDS()]
 #' @return None, global environment is modified
 #'
 #' @export
@@ -11,21 +13,27 @@
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
-#' # Creates files "data/rds/mtcars.rds" and "data/rds/letters.rds"
-#' # relative to project root
-#' save_all(c("mtcars", "letters"), "data", "rds")
-save_all <- function(.list, ...) {
-  rdsdir = here::here(...)
-  vars = .list
-  objs = purrr::map(vars, get)
-  paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
-  purrr::walk2(objs, paths, saveRDS)
+#' # Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
+#' my_mtcars <- mtcars; my_letters <- letters
+#' save_all(c("my_mtcars", "my_letters"))
+#' rm(my_mtcars, my_letters)
+#' read_all(c("my_mtcars", "my_letters"))
+save_all <- function(.list, rdsdir = NULL, ...) {
+  if (is.null(rdsdir)) {
+    rdsdir <- tempdir()
+  }
+  sapply(.list, function(name) {
+    saveRDS(get(name), file.path(rdsdir, paste0(name, ".rds")), ...)
+  })
+  invisible()
 }
 
 #' Load multiple RDS files into current environment
 #'
 #' @param .list character vector of names
-#' @param ... path components relative to project root
+#' @param rdsdir path to directory, passed to [base::file.path()].
+#'   If not specified, [base::tempdir()].
+#' @param ... additional options passed to [base::readRDS()]
 #' @return None, global environment is modified
 #'
 #' @export
@@ -33,13 +41,18 @@ save_all <- function(.list, ...) {
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
-#' # Reads from "data/rds/my_mtcars.rds" and "data/rds/my_letters.rds"
-#' # relative to project root
-#' read_all(c("my_mtcars", "my_letters"), "data", "rds")
-read_all <- function(.list, ...) {
-  rdsdir = here::here(...)
-  vars = .list
-  paths = purrr::map(vars, ~file.path(rdsdir, paste0(., ".rds")))
-  objs = purrr::map(paths, readRDS)
-  purrr::walk2(vars, objs, assign, .GlobalEnv)
+#' # Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
+#' my_mtcars <- mtcars; my_letters <- letters
+#' save_all(c("my_mtcars", "my_letters"))
+#' rm(my_mtcars, my_letters)
+#' read_all(c("my_mtcars", "my_letters"))
+read_all <- function(.list, rdsdir = NULL, ...) {
+  if (is.null(rdsdir)) {
+    rdsdir <- tempdir()
+  }
+  sapply(.list, function(name) {
+    assign(name, readRDS(file.path(rdsdir, paste0(name, ".rds")), ...),
+           envir = .GlobalEnv)
+  })
+  invisible()
 }
