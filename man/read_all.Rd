@@ -22,3 +22,10 @@ Load multiple RDS files into current environment
 # relative to project root
 read_all(c("my_mtcars", "my_letters"), "data", "rds")
 }
+\seealso{
+Other Saving/loading data: \code{\link{save_all}}
+}
+\author{
+Sean Ho <anchor@seanho.com>
+}
+\concept{Saving/loading data}

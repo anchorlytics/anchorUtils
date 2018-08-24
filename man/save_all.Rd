@@ -11,6 +11,9 @@ save_all(.list, ...)
 
 \item{...}{path components relative to project root}
 }
+\value{
+None, global environment is modified
+}
 \description{
 Save multiple objects as RDS files
 }
@@ -19,3 +22,10 @@ Save multiple objects as RDS files
 # relative to project root
 save_all(c("mtcars", "letters"), "data", "rds")
 }
+\seealso{
+Other Saving/loading data: \code{\link{read_all}}
+}
+\author{
+Sean Ho <anchor@seanho.com>
+}
+\concept{Saving/loading data}

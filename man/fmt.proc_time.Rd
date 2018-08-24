@@ -7,7 +7,7 @@
 fmt.proc_time(.pt)
 }
 \arguments{
-\item{.pt}{A proc_time object, e.g., from system.time()}
+\item{.pt}{A proc_time object, e.g., from [base::system.time()]}
 }
 \value{
 A formatted string.
@@ -17,4 +17,7 @@ Pretty-print a proc_time object
 }
 \examples{
 fmt.proc_time(system.time(rnorm(1e7)))
+}
+\author{
+Sean Ho <anchor@seanho.com>
 }
