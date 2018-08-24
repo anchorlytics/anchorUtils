@@ -4,17 +4,6 @@
 #'
 #' Dummy coding expands a polytomous categorical factor into several
 #' indicator variables, each of which is logical (Boolean, TRUE/FALSE).
-#' The one-hot contrast expands a factor with `L` levels into `L` indicator
-#' variables.  The result is not a full-rank parameterisation,
-#' however it avoids needing to select a reference level.
-#'
-#' Ordinal (ordered categorical) and dichotomous (only 2 levels) variables are
-#' not modified; nor are non-factors (numeric, logical, etc.).
-#' Additional arguments are passed to [dplyr::select()] to further filter the
-#' list of variables eligible for dummy coding.
-#'
-#' The new indicator variables are appended to the end of the variable list,
-#' and the original factors are removed.
 #'
 #' @param .data data frame
 #' @param ... One or more unquoted expressions separated by commas,
@@ -23,9 +12,22 @@
 #'
 #' @return data frame with selected factors converted to logical dummy variables
 #'
+#' @details
+#' The one-hot contrast expands a factor with `L` levels into `L` indicator
+#' variables.  The result is not a full-rank parameterisation,
+#' however it avoids needing to select a reference level.
+#'
+#' Ordinal (ordered categorical) and dichotomous (only 2 levels) variables are
+#' not modified; nor are non-factors (numeric, logical, etc.).
+#'
+#' Note that the number of levels is determined from the unique values in the
+#' actual data, rather than the factor levels.
+#'
+#' The new indicator variables are appended to the end of the variable list,
+#' and the original factors are removed.
+#'
 #' @export
-#' @importFrom dplyr quos everything select select_if one_of
-#' @importFrom stats model.frame model.matrix contrasts
+#' @importFrom stats na.omit model.frame model.matrix contrasts
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -34,37 +36,31 @@
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code()
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code(-cyl)
 dummy_code <- function(.data, ...) {
-  sel = quos(...)
-  if (length(sel) < 1) {
-    sel = quos(everything())
+  # logical vector
+  noms <-
+    sapply(.data, function(col) {
+      is.factor(col) & !is.ordered(col) &
+        length(na.omit(unique(col))) > 2
+    })
+
+  if (!any(noms)) {
+    return(.data)
   }
 
-  noms <-
-    names(
-      select_if(
-        select_if(
-          select(.data, !!!sel),
-          ~is.factor(.) & !is.ordered(.)
-        ),
-        ~length(na.omit(unique(.))) > 2
-      )
-    )
+  # add terms attribute to orig data frame
+  nom_frame <- model.frame(~., .data[, noms], na.action = "na.pass")
 
-  nom_frame <-
-    model.frame(~., select(.data, one_of(noms)), na.action = "na.pass")
-
-  cbind(
-    select(.data, -one_of(noms)),
+  # data frame with only dummy vars
+  nom_df <-
     sapply(
-      as.data.frame(
-        model.matrix(
-          ~.-1, data = nom_frame,
-          contrasts.arg = lapply(nom_frame, contrasts, contrasts = FALSE)
-        )
-      ),
+      as.data.frame(model.matrix(
+        ~.-1, data = nom_frame,
+        contrasts.arg = lapply(nom_frame, contrasts, contrasts = FALSE)
+      )),
       as.logical
     )
-  )
+
+  cbind(.data[, !noms], nom_df)
 }
 
 #' Compress integer ordinal factors with too many levels
