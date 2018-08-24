@@ -20,14 +20,11 @@ This creates an Mplus input syntax line indicating which
 variables are ordered categorical.
 }
 \examples{
-library(dplyr)
-as_tibble(mtcars) \%>\%
-  mutate_at(c("cyl", "vs", "am"), as.ordered) \%>\%
-  rename(`Number of Cylinders` = cyl,
-         `Engine V-shaped or Straight` = vs,
-         `Transmission Automatic or Manual` = am) \%>\%
-  mp_ordinal() \%>\%
-  cat()
+cat(mp_ordinal(data.frame(
+  Number_of_Cylinders = ordered(mtcars$cyl),
+  Miles_per_Gallon = mtcars$mpg,
+  Engine_V_shaped_or_Straight = ordered(mtcars$vs),
+  Transmission_Automatic_or_Manual = ordered(mtcars$am))))
 }
 \seealso{
 Other Mplus helpers: \code{\link{mp_wordwrap}}

@@ -40,20 +40,16 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #'   [MplusAutomation::mplusObject()] in the `VARIABLE` argument
 #'
 #' @export
-#' @importFrom dplyr select_if
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
-#' library(dplyr)
-#' as_tibble(mtcars) %>%
-#'   mutate_at(c("cyl", "vs", "am"), as.ordered) %>%
-#'   rename(`Number of Cylinders` = cyl,
-#'          `Engine V-shaped or Straight` = vs,
-#'          `Transmission Automatic or Manual` = am) %>%
-#'   mp_ordinal() %>%
-#'   cat()
+#' cat(mp_ordinal(data.frame(
+#'   Number_of_Cylinders = ordered(mtcars$cyl),
+#'   Miles_per_Gallon = mtcars$mpg,
+#'   Engine_V_shaped_or_Straight = ordered(mtcars$vs),
+#'   Transmission_Automatic_or_Manual = ordered(mtcars$am))))
 mp_ordinal <- function(.data, ...) {
-  mp_wordwrap(c("CATEGORICAL =", names(select_if(.data, is.ordered)), ";"),
+  mp_wordwrap(c("CATEGORICAL =", names(which(sapply(.data, is.ordered))), ";"),
               ...)
 }
