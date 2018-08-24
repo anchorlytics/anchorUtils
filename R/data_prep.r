@@ -62,7 +62,7 @@ dummy_code <- function(.data, ...) {
 #'
 #' Polychoric correlation routines often limit the number of levels an
 #' ordinal (ordered categorical) factor can have.
-#' This function is like `forcats::fct_collapse` but preserves the ordering
+#' This function is like [forcats::fct_collapse()] but preserves the ordering
 #' of levels.
 #'
 #' @param .data data frame with proper column types
@@ -97,7 +97,7 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' factor analysis.
 #'
 #' @param .data data frame
-#' @param ... other options passed through to `caret::nearZeroVar``
+#' @param ... other options passed through to [caret::nearZeroVar()]
 #' @return data frame, potentially with fewer columns
 #'
 #' @importFrom dplyr select one_of

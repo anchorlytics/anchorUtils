@@ -7,10 +7,10 @@
 #' and word-wraps the result, returning a single string.
 #'
 #' @param .list a character vector
-#' @param width passed to `stringi::stri_wrap`
-#' @param exdent passed to `stringi::stri_wrap`
-#' @param whitespace_only passed to `stringi::stri_wrap`
-#' @param ... passed to `stringi::stri_wrap`
+#' @param width passed to [stringi::stri_wrap()]
+#' @param exdent passed to [stringi::stri_wrap()]
+#' @param whitespace_only passed to [stringi::stri_wrap()]
+#' @param ... passed to [stringi::stri_wrap()]
 #' @return a single string, potentially with newlines
 #'
 #' @importFrom stringi stri_wrap
@@ -34,11 +34,10 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #' variables are ordered categorical.
 #'
 #' @param .data data frame with proper column types
-#' @param ... additional options passed to `mp_wordwrap()``
+#' @param ... additional options passed to [mp_wordwrap()]
 #' @return a single string that can be passed to
-#'   `MplusAutomation::mplusObject()` in the `VARIABLE` argument
+#'   [MplusAutomation::mplusObject()] in the `VARIABLE` argument
 #'
-#' @author Sean Ho `<anchor@seanho.com>``
 #' @importFrom dplyr %>% select_if
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>

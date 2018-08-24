@@ -1,7 +1,6 @@
 #' Find indices of TRUE entries in an array
 #'
-#' `base::which(arr.ind = TRUE)` returns numeric indices of TRUE entries
-#' in an array.
+#' [base::which()] returns numeric indices of TRUE entries in an array.
 #' This wrapper uses `dimnames` to return pairs of row/column names.
 #'
 #' @param .a array
@@ -9,7 +8,7 @@
 #'   E.g., if `.a` is a matrix, then `length(dimnames) == 2`,
 #'   `dimnames[[1]]` is a vector of row names, and
 #'   `dimnames[[2]]` is a vector of column names.
-#' @param ... Additional options passed to `base::which()``.
+#' @param ... Additional options passed to [base::which()].
 #'
 #' @return a tibble of named indices
 #' @importFrom dplyr %>% as_tibble
