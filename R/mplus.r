@@ -20,11 +20,12 @@
 #' cat(mp_wordwrap(rownames(mtcars)))
 mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
                         ...) {
-  paste(.list, collapse = " ") %>%
-    # stringr::str_wrap doesn't expose 'whitespace_only' option
-    stringi::stri_wrap(width = width, exdent = exdent,
-                       whitespace_only = whitespace_only, ...) %>%
-    paste(collapse = "\n")
+  # stringr::str_wrap doesn't expose 'whitespace_only' option
+  paste(
+    stringi::stri_wrap(
+      paste(.list, collapse = " "),
+      width = width, exdent = exdent, whitespace_only = whitespace_only, ...),
+    collapse = "\n")
 }
 
 #' Specify ordinal variables to Mplus
