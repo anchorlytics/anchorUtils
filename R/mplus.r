@@ -29,10 +29,10 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
     collapse = "\n")
 }
 
-#' Specify ordinal variables to Mplus
+#' Specify categorical variables to Mplus
 #'
 #' This creates an Mplus input syntax line indicating which
-#' variables are ordered categorical.
+#' variables are categorical (ordinal or binary/dichotomous).
 #'
 #' @param .data data frame with proper column types
 #' @param ... additional options passed to [mp_wordwrap()]
@@ -44,12 +44,14 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
-#' cat(mp_ordinal(data.frame(
+#' cat(mp_cat(data.frame(
 #'   Number_of_Cylinders = ordered(mtcars$cyl),
 #'   Miles_per_Gallon = mtcars$mpg,
 #'   Engine_V_shaped_or_Straight = ordered(mtcars$vs),
 #'   Transmission_Automatic_or_Manual = ordered(mtcars$am))))
-mp_ordinal <- function(.data, ...) {
-  mp_wordwrap(c("CATEGORICAL =", names(which(sapply(.data, is.ordered))), ";"),
-              ...)
+mp_cat <- function(.data, ...) {
+  mp_wordwrap(c(
+    "CATEGORICAL =",
+    names(which(sapply(.data, ~is.ordered(.) | is.logical(.)))),
+    ";"), ...)
 }
