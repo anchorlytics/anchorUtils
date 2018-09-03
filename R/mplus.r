@@ -33,6 +33,8 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 #'
 #' This creates an Mplus input syntax line indicating which
 #' variables are categorical (ordinal or binary/dichotomous).
+#' A variable is deemed dichotomous if it has at most two unique non-NA values,
+#' regardless of its type.
 #'
 #' @param .data data frame with proper column types
 #' @param ... additional options passed to [mp_wordwrap()]
@@ -52,6 +54,8 @@ mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 mp_cat <- function(.data, ...) {
   mp_wordwrap(c(
     "CATEGORICAL =",
-    names(which(sapply(.data, ~is.ordered(.) | is.logical(.)))),
+    names(which(sapply(.data, function(col) {
+      is.ordered(col) | length(na.omit(unique(col))) <= 2
+    }))),
     ";"), ...)
 }

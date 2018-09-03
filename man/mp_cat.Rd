@@ -18,6 +18,8 @@ a single string that can be passed to
 \description{
 This creates an Mplus input syntax line indicating which
 variables are categorical (ordinal or binary/dichotomous).
+A variable is deemed dichotomous if it has at most two unique non-NA values,
+regardless of its type.
 }
 \examples{
 cat(mp_cat(data.frame(
