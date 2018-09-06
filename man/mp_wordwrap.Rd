@@ -30,7 +30,8 @@ and word-wraps the result, returning a single string.
 cat(mp_wordwrap(rownames(mtcars)))
 }
 \seealso{
-Other Mplus helpers: \code{\link{mp_cat}}
+Other Mplus helpers: \code{\link{mp_cat}},
+  \code{\link{parse_tech4}}
 }
 \author{
 Sean Ho <anchor@seanho.com>
