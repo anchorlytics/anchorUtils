@@ -14,5 +14,6 @@ Imports:
     lubridate,
     stringi,
     caret,
+    MplusAutomation,
     dplyr
 RoxygenNote: 6.1.0
