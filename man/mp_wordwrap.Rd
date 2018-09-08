@@ -10,13 +10,11 @@ mp_wordwrap(.list, width = 80, exdent = 4, whitespace_only = TRUE,
 \arguments{
 \item{.list}{a character vector}
 
-\item{width}{passed to [stringi::stri_wrap()]}
+\item{width}{passed to [base::strwrap()]}
 
-\item{exdent}{passed to [stringi::stri_wrap()]}
+\item{exdent}{passed to [base::strwrap()]}
 
-\item{whitespace_only}{passed to [stringi::stri_wrap()]}
-
-\item{...}{passed to [stringi::stri_wrap()]}
+\item{...}{passed to [base::strwrap()]}
 }
 \value{
 a single string, potentially with newlines
