@@ -56,6 +56,54 @@ mp_cat <- function(.data, ...) {
     ";"), ...)
 }
 
+#' Run Mplus and save full output
+#'
+#' MplusAutomation::mplusModeler() runs Mplus and augments the
+#' mplusOjbect with a $results element.
+#' This wrapper saves the full text output from Mplus in an element named
+#' $stdout within that $results element.
+#'
+#' This function has side-effects, just like mplusModeler(), in that
+#' it leaves Mplus input, output, and savedata files in the current directory.
+#'
+#' @param .obj mplusObject as created by MplusAutomation::mplusObject()
+#' @param name basename for generated Mplus files (no extension)
+#' @param run set to 0 for dry-run (passed to MplusAutomation::mplusModeler())
+#' @param ... additional options passed to MplusAutomation::mplusModeler()
+#' @return an mplusObject with a $results section
+#'
+#' @export
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
+#'
+mp_run <- function(.obj, name = "mp", run = 1, ...) {
+  msgs <- utils::capture.output({
+    res <- MplusAutomation::mplusModeler(
+      .obj, dataout = paste0(name, ".dat"), run = run, ...)
+  })
+  res$results$stdout <- msgs
+  res
+}
+
+#' Check if fitted mplusObject has converged
+#'
+#' This macro uses the existence of estimated standard errors as a proxy
+#' for determining if the model was identified.
+#'
+#' @param .obj mplusObject fitted by MplusAutomation::mplusModeler()
+#' @param param character name of field to look for in parameter list.
+#'   By default, look for existence of standard errors.
+#' @return logical
+#'
+#' @export
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
+#'
+is_identified <- function(.obj, param = "se") {
+  # first set in $parameters is usually unstandardized
+  param %in% names(.obj$results$parameters[[1]])
+}
+
 #' Parse Mplus TECH4 output
 #'
 #' Mplus' `TECH4` output contains first- and second-order estimated **moments**
