@@ -4,14 +4,10 @@
 \alias{dummy_code}
 \title{Dummy-code (one-hot) factors}
 \usage{
-dummy_code(.data, ...)
+dummy_code(.data)
 }
 \arguments{
 \item{.data}{data frame}
-
-\item{...}{One or more unquoted expressions separated by commas,
-as passed to [dplyr::select()].
-If omitted, all variables are considered.}
 }
 \value{
 data frame with selected factors converted to logical dummy variables
@@ -37,7 +33,6 @@ and the original factors are removed.
 \examples{
 library(dplyr)
 mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code()
-mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code(-cyl)
 }
 \seealso{
 Other data munging: \code{\link{drop_nzv}},

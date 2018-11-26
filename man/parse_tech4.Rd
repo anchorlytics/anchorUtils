@@ -43,12 +43,9 @@ If standard errors are available, there are **twice** as many subsections as
 there are groups: first all the moments for each of the groups, then all the
 standard errors for each of the groups.
 }
-\examples{
-# Not run
-parse_tech4(readLines("mplus.out"))
-}
 \seealso{
-Other Mplus helpers: \code{\link{mp_cat}},
+Other Mplus helpers: \code{\link{is_identified}},
+  \code{\link{mp_cat}}, \code{\link{mp_run}},
   \code{\link{mp_wordwrap}}
 }
 \author{

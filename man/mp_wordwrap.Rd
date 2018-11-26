@@ -4,8 +4,7 @@
 \alias{mp_wordwrap}
 \title{Word wrap to accommodate Mplus line length limitations.}
 \usage{
-mp_wordwrap(.list, width = 80, exdent = 4, whitespace_only = TRUE,
-  ...)
+mp_wordwrap(.list, width = 80, exdent = 4, ...)
 }
 \arguments{
 \item{.list}{a character vector}
@@ -28,7 +27,8 @@ and word-wraps the result, returning a single string.
 cat(mp_wordwrap(rownames(mtcars)))
 }
 \seealso{
-Other Mplus helpers: \code{\link{mp_cat}},
+Other Mplus helpers: \code{\link{is_identified}},
+  \code{\link{mp_cat}}, \code{\link{mp_run}},
   \code{\link{parse_tech4}}
 }
 \author{
