@@ -18,8 +18,7 @@
 #'
 #' @examples
 #' cat(mp_wordwrap(rownames(mtcars)))
-mp_wordwrap <- function(.list, width = 80, exdent = 4, whitespace_only = TRUE,
-                        ...) {
+mp_wordwrap <- function(.list, width = 80, exdent = 4, ...) {
   paste(
     strwrap(paste(.list, collapse = " "), width = width, exdent = exdent, ...),
     collapse = "\n")
@@ -137,12 +136,10 @@ is_identified <- function(.obj, param = "se") {
 #'   Each entry has members 'cov' and 'cor',
 #'   each of which has members 'est', 'se', 'ratio', and 'p',
 #'   each of which is a matrix.
+#'
 #' @export
 #' @family Mplus helpers
 #' @author Sean Ho <anchor@seanho.com>
-#' @examples
-#' # Not run
-#' parse_tech4(readLines("mplus.out"))
 parse_tech4 <- function(.text) {
   output <- MplusAutomation:::parse_into_sections(.text)
   tech4 <- MplusAutomation:::getSection("^TECHNICAL 4 OUTPUT$", output)

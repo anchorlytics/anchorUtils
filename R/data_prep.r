@@ -6,9 +6,6 @@
 #' indicator variables, each of which is logical (Boolean, TRUE/FALSE).
 #'
 #' @param .data data frame
-#' @param ... One or more unquoted expressions separated by commas,
-#'   as passed to [dplyr::select()].
-#'   If omitted, all variables are considered.
 #'
 #' @return data frame with selected factors converted to logical dummy variables
 #'
@@ -34,8 +31,7 @@
 #' @examples
 #' library(dplyr)
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code()
-#' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code(-cyl)
-dummy_code <- function(.data, ...) {
+dummy_code <- function(.data) {
   # logical vector
   noms <-
     sapply(.data, function(col) {
