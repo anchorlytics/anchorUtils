@@ -103,6 +103,47 @@ is_identified <- function(.obj, param = "se") {
   param %in% names(.obj$results$parameters[[1]])
 }
 
+#' Format Mplus warning/error messages
+#'
+#' Pull all messages from the Mplus output object,
+#' concatenate multi-line messages,
+#' and convert case so messages are not all-caps.
+#'
+#' @param .obj mplusObject fitted by MplusAutomation::mplusModeler()
+#' @param what character vector of fields to pull from .obj
+#' @return character vector of messages
+#'
+#' @export
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
+#'
+mp_messages <- function(.obj, what = c("errors", "warnings")) {
+  lapply(
+    lapply(
+      unlist(.obj$result[what], recursive = FALSE),
+      paste, collapse = " "
+    ),
+    stringi::stri_trans_totitle, type = "sentence"
+  )
+}
+
+#' Abbreviations for common phrases in Mplus messages
+#'
+#' @export
+#' @family Mplus helpers
+#' @author Sean Ho <anchor@seanho.com>
+#'
+#' @examples
+#' stringr::str_replace_all(c(
+#'   "cov matrix (psi) is not positive definite. Variable x."
+#'   ), mp_abbrev)
+mp_abbrev <- c(
+  "^.* matrix (.*) is not positive definite\\..*$" =
+    "Not positive definite: \\1",
+  "^.* (best loglikelihood value was not replicated).*$" =
+    "\\1"
+)
+
 #' Parse Mplus TECH4 output
 #'
 #' Mplus' `TECH4` output contains first- and second-order estimated **moments**
