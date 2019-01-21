@@ -28,7 +28,8 @@ cat(mp_wordwrap(rownames(mtcars)))
 }
 \seealso{
 Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_cat}}, \code{\link{mp_run}},
+  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
+  \code{\link{mp_messages}}, \code{\link{mp_run}},
   \code{\link{parse_tech4}}
 }
 \author{

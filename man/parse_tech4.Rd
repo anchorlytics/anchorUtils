@@ -45,7 +45,8 @@ standard errors for each of the groups.
 }
 \seealso{
 Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_cat}}, \code{\link{mp_run}},
+  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
+  \code{\link{mp_messages}}, \code{\link{mp_run}},
   \code{\link{mp_wordwrap}}
 }
 \author{

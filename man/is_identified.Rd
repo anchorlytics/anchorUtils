@@ -20,7 +20,8 @@ This macro uses the existence of estimated standard errors as a proxy
 for determining if the model was identified.
 }
 \seealso{
-Other Mplus helpers: \code{\link{mp_cat}},
+Other Mplus helpers: \code{\link{mp_abbrev}},
+  \code{\link{mp_cat}}, \code{\link{mp_messages}},
   \code{\link{mp_run}}, \code{\link{mp_wordwrap}},
   \code{\link{parse_tech4}}
 }
