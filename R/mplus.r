@@ -120,7 +120,7 @@ is_identified <- function(.obj, param = "se") {
 mp_messages <- function(.obj, what = c("errors", "warnings")) {
   lapply(
     lapply(
-      unlist(.obj$result[what], recursive = FALSE),
+      unlist(.obj$results[what], recursive = FALSE),
       paste, collapse = " "
     ),
     stringi::stri_trans_totitle, type = "sentence"
