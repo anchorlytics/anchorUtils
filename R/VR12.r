@@ -1,16 +1,19 @@
-#' Coefficients for computing composite VR12 scales
-VR12_coefs <- read_csv(file.path("data", "VR12_coefs.csv"),
-                 col_types = "ccddddddddddddd") %>%
-  # interviewer mode only
-  filter(Mode == "Phone") %>%
-  # reformat to a list of lists:
-  select(-Mode) %>%
-  nest(-Domain) %>%
-  spread(Domain, data) %>%
-  map(unlist)
-
-#' Scale VR12 items to 0-100
-#' Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sashttps://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12:
+#' Scale VR12 items
+#'
+#' Given a tibble with columns named according to the VR12 items,
+#' scale them from original Likert to a 0 to 100 scale.
+#'
+#' Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12.
+#'
+#' @param .data tibble with VR12 items on Likert scale
+#' @return tibble with VR12 items on 0 to 100 scale
+#'
+#' @export
+#' @importFrom dplyr %>%
+#' @examples
+#' VR12_scale(data.frame(
+#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3, RE3 = 2:3,
+#'   BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
 VR12_scale <- function(.data) {
   dplyr::mutate(
@@ -33,25 +36,32 @@ VR12_scale <- function(.data) {
 #' The input data should have at least the following integer columns:
 #' GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
 #' It may have other columns as well.
+#' A temporary column named CONS is used; if a column of this name exists
+#' already, it will be deleted.
 #' If there is any missing data, imputation should be performed prior to this.
 #'
+#' The default set of scoring coefficients is from the Interviewer form.
+#'
 #' @param .data tibble
+#' @param coefs scoring coefficients
 #' @return tibble with new columns VR12PCS and VR12MCS
 #'
+#' @importFrom dplyr %>%
 #' @export
 #' @family VR12
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' VR12_score(data.frame(
-#'   GH1 = 2, PF2 = 0, PF4 = 0, RP2 = 3, RP3 = 3, RE2 = 3, RE3 = 3, BP2 = 3,
-#'   MH3 = 3, VT2 = 3, MH4 = 0, SF2 = 0))
+#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3, RE3 = 2:3,
+#'   BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
-VR12_score <- function(.data, coefs = VR12_coefs) {
-  dplyr::mutate(
-    .data,
-    CONS = 1,
-    VR12PCS = data.matrix(select(., names(VR12$PCS))) %*% VR12$PCS,
-    VR12MCS = data.matrix(select(., names(VR12$MCS))) %*% VR12$MCS
-  )
+VR12_score <- function(.data, coefs = VR12_coefs$Phone) {
+  VR12_scale(.data) %>%
+    dplyr::mutate(CONS = 1) %>%
+    dplyr::mutate(
+      VR12PCS = data.matrix(dplyr::select(., names(coefs$PCS))) %*% coefs$PCS,
+      VR12MCS = data.matrix(dplyr::select(., names(coefs$MCS))) %*% coefs$MCS
+    ) %>%
+    dplyr::select(-CONS)
 }

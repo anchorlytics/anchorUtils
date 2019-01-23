@@ -8,12 +8,18 @@ Description: In-house utility functions for Anchorlytics Consulting.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 2.10)
 Imports:
     stats,
+    usethis,
+    dplyr,
     purrr,
+    readr,
     lubridate,
     caret,
     MplusAutomation,
     stringi,
-    dplyr
+Suggests:
+    stringr
 RoxygenNote: 6.1.1
