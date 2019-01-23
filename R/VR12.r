@@ -63,10 +63,10 @@ VR12_score <- function(.data, .vars, scale, mode = "Phone") {
     dplyr::mutate(CONS = 1)
   names(item_scores) <- names(VR12_coefs[[mode]][[scale]])
   # scale to 0-100
-  item_scores <- anchorUtils:::VR12_scale(item_scores)
+  item_scores <- VR12_scale(item_scores)
   # dot-product with coefficients
   component <- data.matrix(item_scores) %*% VR12_coefs[[mode]][[scale]]
   # merge with original dataset
   .data %>%
-    dplyr::bind_cols(scale = component) # TODO: eval scale
+    dplyr::bind_cols(!!scale := component)
 }
