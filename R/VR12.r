@@ -8,24 +8,24 @@
 #' @param .data tibble with VR12 items on Likert scale
 #' @return tibble with VR12 items on 0 to 100 scale
 #'
-#' @export
 #' @importFrom dplyr %>%
 #' @examples
-#' VR12_scale(data.frame(
-#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3, RE3 = 2:3,
-#'   BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
+#' anchorUtils:::VR12_scale(data.frame(CONS = 1,
+#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
+#'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
 VR12_scale <- function(.data) {
-  dplyr::mutate(
-    .data,
-    GH1  = c(100, 85, 60, 35, 0)[GH1],
-    PF2 = (PF2-1)*50, PF4 = (PF4-1)*50,
-    RP2 = (5-RP2)*25, RP3 = (5-RP3)*25,
-    RE2 = (5-RE2)*25, RE3 = (5-RE3)*25,
-    BP2 = (5-BP2)*25, MH3 = (6-MH3)*20,
-    VT2 = (6-VT2)*20, MH4 = (MH4-1)*20,
-    SF2 = (SF2-1)*25
-  )
+  .data %>%
+    dplyr::mutate_at(names(VR12_coefs$Phone$PCS), as.integer) %>%
+    dplyr::mutate(
+      GH1 = c(100, 85, 60, 35, 0)[GH1],
+      PF2 = (PF2-1)*50, PF4 = (PF4-1)*50,
+      RP2 = (5-RP2)*25, RP3 = (5-RP3)*25,
+      RE2 = (5-RE2)*25, RE3 = (5-RE3)*25,
+      BP2 = (5-BP2)*25, MH3 = (6-MH3)*20,
+      VT2 = (6-VT2)*20, MH4 = (MH4-1)*20,
+      SF2 = (SF2-1)*25
+    )
 }
 
 #' Compute VR12 subscales
@@ -53,12 +53,13 @@ VR12_scale <- function(.data) {
 #'
 #' @examples
 #' VR12_score(data.frame(
-#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3, RE3 = 2:3,
-#'   BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
+#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
+#'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
 VR12_score <- function(.data, coefs = VR12_coefs$Phone) {
-  VR12_scale(.data) %>%
+  .data %>%
     dplyr::mutate(CONS = 1) %>%
+    VR12_scale() %>%
     dplyr::mutate(
       VR12PCS = data.matrix(dplyr::select(., names(coefs$PCS))) %*% coefs$PCS,
       VR12MCS = data.matrix(dplyr::select(., names(coefs$MCS))) %*% coefs$MCS
