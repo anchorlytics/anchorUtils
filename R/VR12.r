@@ -5,7 +5,7 @@
 #'
 #' Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12.
 #'
-#' @param .data tibble with VR12 items on Likert scale
+#' @param .data tibble with VR12 items on 1-based integer scale
 #' @return tibble with VR12 items on 0 to 100 scale
 #'
 #' @importFrom dplyr %>%
@@ -29,18 +29,18 @@ VR12_scale <- function(.data) {
 
 #' Compute VR12 component subscale
 #'
-#' Given a tibble with VR12 item scores, add a column either "PCS" or "MCS"
-#' with component VR12 scores.
+#' Given a tibble with VR12 item scores, add a column for component VR12 scores.
 #'
 #' If there is any missing data, imputation should be performed prior to this.
 #'
 #' @param .data tibble
 #' @param .vars list of columns (parsed with tidyselect) holding the VR12
-#'   item scores.  Order must match the order in the coefficient list:
-#'   by default, GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
+#'   item scores, in the following order:
+#'   GH1, PF2, PF4, VRP2, VRP3, VRE2, VRE3, BP2, MH3, VT2, MH4, SF2.
+#'   Item scores should be 1-based integers.
 #' @param scale either "PCS" (physical component) or "MCS" (mental component)
-#' @param mode either "Phone" (default, interviewer) or "Mail" (self-report)
-#' @return tibble with new columns VR12PCS and VR12MCS
+#' @param mode either "Phone" (default) or "Mail"
+#' @return tibble with new column, either "PCS" or "MCS"
 #'
 #' @export
 #' @importFrom dplyr %>%
@@ -49,8 +49,9 @@ VR12_scale <- function(.data) {
 #'
 #' @examples
 #' VR12_score(data.frame(
-#'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
-#'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1),
+#'   GH1 = c(1, 4), PF2 = c(3, 1), PF4 = c(3, 1), RP2 = c(1, 4), RP3 = c(1, 4),
+#'   RE2 = c(1, 4), RE3 = c(1, 4), BP2 = c(1, 5), MH3 = c(1, 5), VT2 = c(1, 5),
+#'   MH4 = c(6, 1), SF2 = c(5, 1)),
 #'   dplyr::everything(), "PCS")
 #'
 VR12_score <- function(.data, .vars, scale, mode = "Phone") {
