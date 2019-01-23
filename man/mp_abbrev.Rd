@@ -11,6 +11,11 @@ mp_abbrev
 \description{
 Abbreviations for common phrases in Mplus messages
 }
+\examples{
+stringr::str_replace_all(c(
+  "cov matrix (psi) is not positive definite. Variable x."
+  ), mp_abbrev)
+}
 \seealso{
 Other Mplus helpers: \code{\link{is_identified}},
   \code{\link{mp_cat}}, \code{\link{mp_messages}},
