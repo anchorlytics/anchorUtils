@@ -10,13 +10,12 @@
 #'
 #' @importFrom dplyr %>%
 #' @examples
-#' anchorUtils:::VR12_scale(data.frame(CONS = 1,
+#' anchorUtils:::VR12_scale(data.frame(
 #'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
 #'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
 VR12_scale <- function(.data) {
   .data %>%
-    dplyr::mutate_at(names(VR12_coefs$Phone$PCS), as.integer) %>%
     dplyr::mutate(
       GH1 = c(100, 85, 60, 35, 0)[GH1],
       PF2 = (PF2-1)*50, PF4 = (PF4-1)*50,
@@ -30,20 +29,18 @@ VR12_scale <- function(.data) {
 
 #' Compute VR12 subscales
 #'
-#' Given a tibble of VR12 item scores, append two new columns:
-#' VR12PCS (physical) and VR12MCS (mental).
+#' Given a tibble with VR12 item scores,
+#' create two new columns: VR12PCS (physical) and VR12MCS (mental).
 #'
-#' The input data should have at least the following integer columns:
-#' GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
-#' It may have other columns as well.
-#' A temporary column named CONS is used; if a column of this name exists
-#' already, it will be deleted.
 #' If there is any missing data, imputation should be performed prior to this.
 #'
 #' The default set of scoring coefficients is from the Interviewer form.
 #'
 #' @param .data tibble
-#' @param coefs scoring coefficients
+#' @param .vars list of columns, e.g., using dplyr::vars(), holding the VR12
+#'   item scores.  Order must match the order in the coefficient list:
+#'   by default, GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
+#' @param coefs vector of scoring coefficients
 #' @return tibble with new columns VR12PCS and VR12MCS
 #'
 #' @importFrom dplyr %>%
@@ -56,9 +53,10 @@ VR12_scale <- function(.data) {
 #'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
 #'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 #'
-VR12_score <- function(.data, coefs = VR12_coefs$Phone) {
+VR12_score <- function(.data, .vars, coefs = VR12_coefs$Phone) {
   .data %>%
     dplyr::mutate(CONS = 1) %>%
+    dplyr::mutate_at(names(coefs), as.integer) %>%
     VR12_scale() %>%
     dplyr::mutate(
       VR12PCS = data.matrix(dplyr::select(., names(coefs$PCS))) %*% coefs$PCS,
