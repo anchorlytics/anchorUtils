@@ -7,7 +7,7 @@
 VR12_scale(.data)
 }
 \arguments{
-\item{.data}{tibble with VR12 items on Likert scale}
+\item{.data}{tibble with VR12 items on 1-based integer scale}
 }
 \value{
 tibble with VR12 items on 0 to 100 scale
@@ -20,7 +20,7 @@ scale them from original Likert to a 0 to 100 scale.
 Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12.
 }
 \examples{
-anchorUtils:::VR12_scale(data.frame(CONS = 1,
+anchorUtils:::VR12_scale(data.frame(
   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
 

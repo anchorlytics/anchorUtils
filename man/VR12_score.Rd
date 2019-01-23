@@ -2,36 +2,37 @@
 % Please edit documentation in R/VR12.r
 \name{VR12_score}
 \alias{VR12_score}
-\title{Compute VR12 subscales}
+\title{Compute VR12 component subscale}
 \usage{
-VR12_score(.data, coefs = VR12_coefs$Phone)
+VR12_score(.data, .vars, scale, mode = "Phone")
 }
 \arguments{
 \item{.data}{tibble}
 
-\item{coefs}{scoring coefficients}
+\item{.vars}{list of columns (parsed with tidyselect) holding the VR12
+item scores, in the following order:
+GH1, PF2, PF4, VRP2, VRP3, VRE2, VRE3, BP2, MH3, VT2, MH4, SF2.
+Item scores should be 1-based integers.}
+
+\item{scale}{either "PCS" (physical component) or "MCS" (mental component)}
+
+\item{mode}{either "Phone" (default) or "Mail"}
 }
 \value{
-tibble with new columns VR12PCS and VR12MCS
+tibble with new column, either "PCS" or "MCS"
 }
 \description{
-Given a tibble of VR12 item scores, append two new columns:
-VR12PCS (physical) and VR12MCS (mental).
+Given a tibble with VR12 item scores, add a column for component VR12 scores.
 }
 \details{
-The input data should have at least the following integer columns:
-GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
-It may have other columns as well.
-A temporary column named CONS is used; if a column of this name exists
-already, it will be deleted.
 If there is any missing data, imputation should be performed prior to this.
-
-The default set of scoring coefficients is from the Interviewer form.
 }
 \examples{
 VR12_score(data.frame(
-  GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
-  RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
+  GH1 = c(1, 4), PF2 = c(3, 1), PF4 = c(3, 1), RP2 = c(1, 4), RP3 = c(1, 4),
+  RE2 = c(1, 4), RE3 = c(1, 4), BP2 = c(1, 5), MH3 = c(1, 5), VT2 = c(1, 5),
+  MH4 = c(6, 1), SF2 = c(5, 1)),
+  dplyr::everything(), "PCS")
 
 }
 \author{
