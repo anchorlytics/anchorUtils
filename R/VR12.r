@@ -27,40 +27,46 @@ VR12_scale <- function(.data) {
     )
 }
 
-#' Compute VR12 subscales
+#' Compute VR12 component subscale
 #'
-#' Given a tibble with VR12 item scores,
-#' create two new columns: VR12PCS (physical) and VR12MCS (mental).
+#' Given a tibble with VR12 item scores, add a column either "PCS" or "MCS"
+#' with component VR12 scores.
 #'
 #' If there is any missing data, imputation should be performed prior to this.
 #'
-#' The default set of scoring coefficients is from the Interviewer form.
-#'
 #' @param .data tibble
-#' @param .vars list of columns, e.g., using dplyr::vars(), holding the VR12
+#' @param .vars list of columns (parsed with tidyselect) holding the VR12
 #'   item scores.  Order must match the order in the coefficient list:
 #'   by default, GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2.
-#' @param coefs vector of scoring coefficients
+#' @param scale either "PCS" (physical component) or "MCS" (mental component)
+#' @param mode either "Phone" (default, interviewer) or "Mail" (self-report)
 #' @return tibble with new columns VR12PCS and VR12MCS
 #'
-#' @importFrom dplyr %>%
 #' @export
+#' @importFrom dplyr %>%
 #' @family VR12
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' VR12_score(data.frame(
 #'   GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
-#'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
+#'   RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1),
+#'   dplyr::everything(), "PCS")
 #'
-VR12_score <- function(.data, .vars, coefs = VR12_coefs$Phone) {
+VR12_score <- function(.data, .vars, scale, mode = "Phone") {
+  item_names <- dplyr::enquo(.vars)
+  # pull copy of dataset
+  item_scores <-
+    .data %>%
+    dplyr::select(!!item_names) %>%
+    dplyr::mutate_all(as.integer) %>%
+    dplyr::mutate(CONS = 1)
+  names(item_scores) <- names(VR12_coefs[[mode]][[scale]])
+  # scale to 0-100
+  item_scores <- anchorUtils:::VR12_scale(item_scores)
+  # dot-product with coefficients
+  component <- data.matrix(item_scores) %*% VR12_coefs[[mode]][[scale]]
+  # merge with original dataset
   .data %>%
-    dplyr::mutate(CONS = 1) %>%
-    dplyr::mutate_at(names(coefs), as.integer) %>%
-    VR12_scale() %>%
-    dplyr::mutate(
-      VR12PCS = data.matrix(dplyr::select(., names(coefs$PCS))) %*% coefs$PCS,
-      VR12MCS = data.matrix(dplyr::select(., names(coefs$MCS))) %*% coefs$MCS
-    ) %>%
-    dplyr::select(-CONS)
+    dplyr::bind_cols(scale = component) # TODO: eval scale
 }
