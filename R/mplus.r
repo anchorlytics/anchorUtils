@@ -139,6 +139,8 @@ mp_messages <- function(.obj, what = c("errors", "warnings")) {
 #'   "cov matrix (psi) is not positive definite. Variable x."
 #'   ), mp_abbrev)
 mp_abbrev <- c(
+  "^.* may not be identified\\. .* parameter: (.*)$" =
+    "not identified: \\1",
   "^.* matrix (.*) is not positive definite\\..*$" =
     "Not positive definite: \\1",
   "^.* (best loglikelihood value was not replicated).*$" =
