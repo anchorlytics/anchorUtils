@@ -42,7 +42,7 @@ VR12_scale <- function(.data) {
 #' @return tibble with new column, either "PCS" or "MCS"
 #'
 #' @export
-#' @importFrom dplyr %>%
+#' @importFrom dplyr %>% %<>%
 #' @family VR12
 #' @author Sean Ho <anchor@seanho.com>
 #'
