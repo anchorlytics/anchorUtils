@@ -1,8 +1,5 @@
 # Coefficients for computing composite VR12 scales
-library(dplyr, warn.conflicts = FALSE)
 library(readr)
-library(tidyr)
-library(purrr)
 library(usethis)
 
 VR12_coefs <-
