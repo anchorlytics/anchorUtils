@@ -57,16 +57,19 @@ VR12_scale <- function(.data) {
 VR12_score <- function(.data, .vars, scale, mode = "Phone") {
   item_names <- dplyr::enquo(.vars)
   # pull copy of dataset
-  item_scores <-
-    .data %>%
-    dplyr::select(!!item_names) %>%
+  item_scores <- dplyr::select(.data, !!item_names)
+  names(item_scores) <- VR12_items
+  item_scores %<>%
     dplyr::mutate_all(as.integer) %>%
     dplyr::mutate(CONS = 1)
-  names(item_scores) <- names(VR12_coefs[[mode]][[scale]])
   # scale to 0-100
   item_scores <- VR12_scale(item_scores)
   # dot-product with coefficients
-  component <- data.matrix(item_scores) %*% VR12_coefs[[mode]][[scale]]
+  coefs <-
+    VR12_coefs %>%
+    filter(Domain == scale, Mode == mode) %>%
+    select(-Domain, -Mode)
+  component <- data.matrix(item_scores) %*% coefs
   # merge with original dataset
   .data %>%
     dplyr::bind_cols(!!scale := component)

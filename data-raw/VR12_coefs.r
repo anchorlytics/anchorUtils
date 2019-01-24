@@ -6,15 +6,11 @@ library(purrr)
 library(usethis)
 
 VR12_coefs <-
-  # system.file("data-raw", "VR12_coefs.csv", package = "anchorUtils") %>%
-  file.path("data-raw", "VR12_coefs.csv") %>%
-  readr::read_csv(col_types = "ccddddddddddddd") %>%
-  tidyr::nest(-Domain, -Mode) %>%
-  dplyr::mutate_at("data", ~purrr::map(., purrr::as_vector)) %>%
-  tidyr::spread(Domain, data) %>%
-  tidyr::nest(-Mode) %>%
-  tidyr::spread(Mode, data) %>%
-  purrr::flatten() %>%
-  purrr::map(purrr::flatten)
+  readr::read_csv(
+    file.path("data-raw", "VR12_coefs.csv"),
+    col_types = "ccddddddddddddd")
+
+VR12_items <- tail(head(names(VR12_coefs), -1), -2)
 
 usethis::use_data(VR12_coefs, internal = TRUE, overwrite = TRUE)
+usethis::use_data(VR12_items, overwrite = TRUE)
