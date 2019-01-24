@@ -42,7 +42,7 @@ VR12_scale <- function(.data) {
 #' @return tibble with new column, either "PCS" or "MCS"
 #'
 #' @export
-#' @importFrom dplyr %>% %<>%
+#' @importFrom dplyr %>%
 #' @family VR12
 #' @author Sean Ho <anchor@seanho.com>
 #'
@@ -58,7 +58,7 @@ VR12_score <- function(.data, .vars, scale, mode = "Phone") {
   # pull copy of dataset
   item_scores <- dplyr::select(.data, !!item_names)
   names(item_scores) <- VR12_items
-  item_scores %<>%
+  item_scores <- item_scores %>%
     dplyr::mutate_all(as.integer) %>%
     dplyr::mutate(CONS = 1)
   # scale to 0-100
