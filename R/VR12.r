@@ -66,8 +66,8 @@ VR12_score <- function(.data, .vars, scale, mode = "Phone") {
   # dot-product with coefficients
   coefs <-
     VR12_coefs %>%
-    filter(Domain == scale, Mode == mode) %>%
-    select(-Domain, -Mode)
+    dplyr::filter(Domain == scale, Mode == mode) %>%
+    dplyr::select(-Domain, -Mode)
   component <- data.matrix(item_scores) %*% coefs
   # merge with original dataset
   .data %>%
