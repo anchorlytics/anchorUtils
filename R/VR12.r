@@ -69,7 +69,7 @@ VR12_score <- function(.data, .vars, scale, mode = "Phone") {
     dplyr::filter(Domain == scale, Mode == mode) %>%
     dplyr::select(-Domain, -Mode) %>%
     purrr::as_vector()
-  component <- purrr::as_vector(data.matrix(item_scores) %*% coefs)
+  component <- as.vector(data.matrix(item_scores) %*% coefs)
   # merge with original dataset
   .data %>%
     dplyr::bind_cols(!!scale := component)
