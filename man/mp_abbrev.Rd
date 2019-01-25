@@ -4,7 +4,7 @@
 \name{mp_abbrev}
 \alias{mp_abbrev}
 \title{Abbreviations for common phrases in Mplus messages}
-\format{An object of class \code{character} of length 3.}
+\format{An object of class \code{character} of length 4.}
 \usage{
 mp_abbrev
 }
