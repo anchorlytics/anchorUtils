@@ -29,6 +29,8 @@ actual data, rather than the factor levels.
 
 The new indicator variables are appended to the end of the variable list,
 and the original factors are removed.
+
+TODO (BUG): if only one factor in tibble, it is renamed "data"
 }
 \examples{
 library(dplyr)

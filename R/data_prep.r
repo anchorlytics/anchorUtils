@@ -23,6 +23,8 @@
 #' The new indicator variables are appended to the end of the variable list,
 #' and the original factors are removed.
 #'
+#' TODO (BUG): if only one factor in tibble, it is renamed "data"
+#'
 #' @export
 #' @importFrom stats na.omit model.frame model.matrix contrasts
 #' @family data munging
