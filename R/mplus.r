@@ -188,6 +188,8 @@ parse_tech4 <- function(.text) {
   t4sec <- MplusAutomation:::getMultilineSection(
     ".* DERIVED .*", tech4, allowMultiple = TRUE)
 
+  if (is.na(t4sec)) { return(NULL)}
+
   # TODO: if no groups, this paragraph produces one group named "X"
   headers <- tech4[attr(t4sec, "matchlines")]
   headers <- trimws(headers)
