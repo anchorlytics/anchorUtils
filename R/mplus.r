@@ -76,11 +76,13 @@ mp_cat <- function(.data, ...) {
 #' @author Sean Ho <anchor@seanho.com>
 #'
 mp_run <- function(.obj, name = "mp", run = 1, ...) {
-  msgs <- utils::capture.output({
-    res <- MplusAutomation::mplusModeler(
-      .obj, dataout = paste0(name, ".dat"), run = run, ...)
+  out <- utils::capture.output({
+    suppressMessages({
+      res <- MplusAutomation::mplusModeler(
+        .obj, dataout = paste0(name, ".dat"), run = run, ...)
+    })
   })
-  res$results$stdout <- msgs
+  res$results$stdout <- out
   res$results$tech4 <- parse_tech4(readLines(paste0(name, ".out")))
   res
 }
