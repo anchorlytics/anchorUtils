@@ -63,7 +63,7 @@ VR12_score <- function(.data, .vars, scale, mode = "Phone") {
   item_names <- dplyr::enquo(.vars)
   # pull copy of dataset
   item_scores <- dplyr::select(.data, !!item_names)
-  names(item_scores) <- VR12_items
+  names(item_scores) <- anchorUtils::VR12_items
   item_scores <- item_scores %>%
     dplyr::mutate_all(as.integer) %>%
     dplyr::mutate(CONS = 1)
