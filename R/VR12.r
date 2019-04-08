@@ -48,6 +48,7 @@ VR12_scale <- function(.data) {
 #'
 #' @export
 #' @importFrom dplyr %>%
+#' @importFrom rlang :=
 #' @family VR12
 #' @author Sean Ho <anchor@seanho.com>
 #'
