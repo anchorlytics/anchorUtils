@@ -7,7 +7,7 @@
 #' and word-wraps the result, returning a single string.
 #'
 #' @param .list a character vector
-#' @param width passed to [base::strwrap()]
+#' @param width passed to \code{\link[base]{strwrap}}
 #' @param exdent passed to [base::strwrap()]
 #' @param ... passed to [base::strwrap()]
 #' @return a single string, potentially with newlines
