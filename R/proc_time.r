@@ -1,5 +1,7 @@
 #' Pretty-print a proc_time object
 #'
+#' TODO: replace purrr with lapply
+#'
 #' @param .pt A proc_time object, e.g., from [base::system.time()]
 #' @return A formatted string.
 #'
@@ -8,7 +10,7 @@
 #'
 #' @examples
 #' fmt.proc_time(system.time(rnorm(1e7)))
-# TODO: replace purrr with lapply
+#'
 fmt.proc_time <- function(.pt) {
   pt_sec = as.list(.pt)$elapsed
   pt_per = lubridate::seconds_to_period(pt_sec)

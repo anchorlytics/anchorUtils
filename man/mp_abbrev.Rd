@@ -4,7 +4,9 @@
 \name{mp_abbrev}
 \alias{mp_abbrev}
 \title{Abbreviations for common phrases in Mplus messages}
-\format{An object of class \code{character} of length 4.}
+\format{
+An object of class \code{character} of length 4.
+}
 \usage{
 mp_abbrev
 }
@@ -17,10 +19,13 @@ stringr::str_replace_all(c(
   ), mp_abbrev)
 }
 \seealso{
-Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_cat}}, \code{\link{mp_messages}},
-  \code{\link{mp_run}}, \code{\link{mp_wordwrap}},
-  \code{\link{parse_tech4}}
+Other Mplus helpers: 
+\code{\link{is_identified}()},
+\code{\link{mp_cat}()},
+\code{\link{mp_messages}()},
+\code{\link{mp_run}()},
+\code{\link{mp_wordwrap}()},
+\code{\link{parse_tech4}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

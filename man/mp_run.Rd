@@ -29,10 +29,13 @@ This function has side-effects, just like mplusModeler(), in that
 it leaves Mplus input, output, and savedata files in the current directory.
 }
 \seealso{
-Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
-  \code{\link{mp_messages}}, \code{\link{mp_wordwrap}},
-  \code{\link{parse_tech4}}
+Other Mplus helpers: 
+\code{\link{is_identified}()},
+\code{\link{mp_abbrev}},
+\code{\link{mp_cat}()},
+\code{\link{mp_messages}()},
+\code{\link{mp_wordwrap}()},
+\code{\link{parse_tech4}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

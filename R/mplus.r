@@ -175,6 +175,9 @@ mp_abbrev <- c(
 #' there are groups: first all the moments for each of the groups, then all the
 #' standard errors for each of the groups.
 #'
+#' TODO: if no groups, returns a single group named "X"
+#' TODO: extract vector of means
+#'
 #' @param .text contents of an Mplus output file, as read by readLines()
 #' @return a list with one entry for each group.
 #'   Each entry has members 'cov' and 'cor',
@@ -192,7 +195,6 @@ parse_tech4 <- function(.text) {
 
   if (any(is.na(t4sec))) { return(NULL)}
 
-  # TODO: if no groups, this paragraph produces one group named "X"
   headers <- tech4[attr(t4sec, "matchlines")]
   headers <- trimws(headers)
   groups <- sapply(headers, function(h) {
@@ -207,7 +209,6 @@ parse_tech4 <- function(.text) {
     p = "two-tailed p-value for"
   )
   moments <- list(
-    #    mean = "means", # TODO: vector, not matrixExtract()
     cov = "covariance matrix",
     cor = "correlation matrix"
   )

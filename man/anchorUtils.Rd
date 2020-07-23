@@ -3,7 +3,6 @@
 \docType{package}
 \name{anchorUtils}
 \alias{anchorUtils}
-\alias{anchorUtils-package}
 \title{anchorUtils: In-house utility functions for Anchorlytics Consulting}
 \description{
 This package is a dump-bin of miscellaneous helper functions accumulated

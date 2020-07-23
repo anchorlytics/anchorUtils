@@ -42,12 +42,18 @@ For **multi-group** models, each group has its own subsection.
 If standard errors are available, there are **twice** as many subsections as
 there are groups: first all the moments for each of the groups, then all the
 standard errors for each of the groups.
+
+TODO: if no groups, returns a single group named "X"
+TODO: extract vector of means
 }
 \seealso{
-Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
-  \code{\link{mp_messages}}, \code{\link{mp_run}},
-  \code{\link{mp_wordwrap}}
+Other Mplus helpers: 
+\code{\link{is_identified}()},
+\code{\link{mp_abbrev}},
+\code{\link{mp_cat}()},
+\code{\link{mp_messages}()},
+\code{\link{mp_run}()},
+\code{\link{mp_wordwrap}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

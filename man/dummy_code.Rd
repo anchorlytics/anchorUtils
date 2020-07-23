@@ -37,8 +37,9 @@ library(dplyr)
 mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code()
 }
 \seealso{
-Other data munging: \code{\link{drop_nzv}},
-  \code{\link{ord_collapse}}
+Other data munging: 
+\code{\link{drop_nzv}()},
+\code{\link{ord_collapse}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

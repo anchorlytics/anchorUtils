@@ -33,8 +33,9 @@ as_tibble(mtcars) \%>\%
   summarise_all(nlevels)
 }
 \seealso{
-Other data munging: \code{\link{drop_nzv}},
-  \code{\link{dummy_code}}
+Other data munging: 
+\code{\link{drop_nzv}()},
+\code{\link{dummy_code}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

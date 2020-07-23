@@ -19,12 +19,16 @@ Removes numeric variables with very little variability.
 This can, for instance, aid stability of inverting covariance matrices for
 factor analysis.
 }
+\details{
+TODO: remove dependency on caret
+}
 \examples{
 drop_nzv(mtcars, freqCut = 1.4)
 }
 \seealso{
-Other data munging: \code{\link{dummy_code}},
-  \code{\link{ord_collapse}}
+Other data munging: 
+\code{\link{dummy_code}()},
+\code{\link{ord_collapse}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

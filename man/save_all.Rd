@@ -28,7 +28,8 @@ rm(my_mtcars, my_letters)
 read_all(c("my_mtcars", "my_letters"))
 }
 \seealso{
-Other Saving/loading data: \code{\link{read_all}}
+Other Saving/loading data: 
+\code{\link{read_all}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

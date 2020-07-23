@@ -4,7 +4,9 @@
 \name{VR12_items}
 \alias{VR12_items}
 \title{List of items in VR-12 (Veterans RAND 12-item) survey}
-\format{A character vector of 12 names.}
+\format{
+A character vector of 12 names.
+}
 \usage{
 VR12_items
 }

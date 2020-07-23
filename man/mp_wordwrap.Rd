@@ -27,10 +27,13 @@ and word-wraps the result, returning a single string.
 cat(mp_wordwrap(rownames(mtcars)))
 }
 \seealso{
-Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
-  \code{\link{mp_messages}}, \code{\link{mp_run}},
-  \code{\link{parse_tech4}}
+Other Mplus helpers: 
+\code{\link{is_identified}()},
+\code{\link{mp_abbrev}},
+\code{\link{mp_cat}()},
+\code{\link{mp_messages}()},
+\code{\link{mp_run}()},
+\code{\link{parse_tech4}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>

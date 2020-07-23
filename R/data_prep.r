@@ -102,6 +102,8 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' This can, for instance, aid stability of inverting covariance matrices for
 #' factor analysis.
 #'
+#' TODO: remove dependency on caret
+#'
 #' @param .data data frame
 #' @param ... other options passed through to [caret::nearZeroVar()]
 #' @return data frame, potentially with fewer columns
@@ -112,7 +114,6 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #'
 #' @examples
 #' drop_nzv(mtcars, freqCut = 1.4)
-# TODO: remove dependency on caret
 drop_nzv <- function(.data, ...) {
   nzv <- caret::nearZeroVar(.data, ...)
   .data[-1*nzv]

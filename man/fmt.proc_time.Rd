@@ -13,10 +13,11 @@ fmt.proc_time(.pt)
 A formatted string.
 }
 \description{
-Pretty-print a proc_time object
+TODO: replace purrr with lapply
 }
 \examples{
 fmt.proc_time(system.time(rnorm(1e7)))
+
 }
 \author{
 Sean Ho <anchor@seanho.com>

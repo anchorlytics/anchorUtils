@@ -20,10 +20,13 @@ concatenate multi-line messages,
 and convert case so messages are not all-caps.
 }
 \seealso{
-Other Mplus helpers: \code{\link{is_identified}},
-  \code{\link{mp_abbrev}}, \code{\link{mp_cat}},
-  \code{\link{mp_run}}, \code{\link{mp_wordwrap}},
-  \code{\link{parse_tech4}}
+Other Mplus helpers: 
+\code{\link{is_identified}()},
+\code{\link{mp_abbrev}},
+\code{\link{mp_cat}()},
+\code{\link{mp_run}()},
+\code{\link{mp_wordwrap}()},
+\code{\link{parse_tech4}()}
 }
 \author{
 Sean Ho <anchor@seanho.com>
