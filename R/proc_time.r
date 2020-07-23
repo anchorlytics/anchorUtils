@@ -2,7 +2,7 @@
 #'
 #' TODO: replace purrr with lapply
 #'
-#' @param .pt A proc_time object, e.g., from [base::system.time()]
+#' @param .pt A proc_time object, e.g., from \code{\link[base]{system.time}}
 #' @return A formatted string.
 #'
 #' @export

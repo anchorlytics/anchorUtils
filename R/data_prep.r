@@ -5,13 +5,8 @@
 #' Dummy coding expands a polytomous categorical factor into several
 #' indicator variables, each of which is logical (Boolean, TRUE/FALSE).
 #'
-#' @param .data data frame
-#'
-#' @return data frame with selected factors converted to logical dummy variables
-#'
-#' @details
-#' The one-hot contrast expands a factor with `L` levels into `L` indicator
-#' variables.  The result is not a full-rank parameterisation,
+#' The one-hot contrast expands a factor with \code{L} levels into \code{L}
+#' indicator variables.  The result is not a full-rank parameterisation,
 #' however it avoids needing to select a reference level.
 #'
 #' Ordinal (ordered categorical) and dichotomous (only 2 levels) variables are
@@ -25,6 +20,9 @@
 #'
 #' TODO (BUG): if only one factor in tibble, it is renamed "data"
 #'
+#' @param .data data frame
+#' @return data frame with selected factors converted to logical dummy variables
+#'
 #' @export
 #' @importFrom stats na.omit model.frame model.matrix contrasts
 #' @family data munging
@@ -33,6 +31,7 @@
 #' @examples
 #' library(dplyr)
 #' mutate_at(mtcars, c("cyl", "gear"), as.factor) %>% dummy_code()
+#'
 dummy_code <- function(.data) {
   # logical vector
   noms <-
@@ -65,14 +64,14 @@ dummy_code <- function(.data) {
 #'
 #' Polychoric correlation routines often limit the number of levels an
 #' ordinal (ordered categorical) factor can have.
-#' This function is like [forcats::fct_collapse()] but preserves the ordering
-#' of levels.
+#' This function is like \code{\link[forcats]{fct_collapse}}
+#' but preserves the ordering of levels.
 #' Modified factors are releveled to 1:n.
 #'
 #' @param .data data frame with ordinal factors coded as integers
-#' @param maxlev apply level collapsing only if `nlevels` is greater than this
+#' @param maxlev apply level collapsing only if \code{nlevels} is greater than this
 #' @param newlev if collapsing levels, how many levels should the factor have.
-#'   Default is `maxlev`.
+#'   Default is \code{maxlev}.
 #' @return data frame with same columns
 #'
 #' @export
@@ -87,6 +86,7 @@ dummy_code <- function(.data) {
 #'   mutate_at("disp", as.ordered) %>%
 #'   ord_collapse() %>%
 #'   summarise_all(nlevels)
+#'
 ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
   mutate_if(
     .data,
@@ -105,15 +105,17 @@ ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
 #' TODO: remove dependency on caret
 #'
 #' @param .data data frame
-#' @param ... other options passed through to [caret::nearZeroVar()]
+#' @param ... other options passed through to \code{\link[caret]{nearZeroVar}}
 #' @return data frame, potentially with fewer columns
 #'
 #' @export
+#' @importFrom caret nearZeroVar
 #' @family data munging
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' drop_nzv(mtcars, freqCut = 1.4)
+#'
 drop_nzv <- function(.data, ...) {
   nzv <- caret::nearZeroVar(.data, ...)
   .data[-1*nzv]

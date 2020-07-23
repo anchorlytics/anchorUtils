@@ -3,7 +3,7 @@
 #' Given a tibble with columns named according to the VR12 items,
 #' scale them from original Likert to a 0 to 100 scale.
 #'
-#' Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12.
+#' Taken from a \href{https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas}{SAS script} for SF12.
 #'
 #' @param .data tibble with VR12 items on 1-based integer scale
 #' @return tibble with VR12 items on 0 to 100 scale
