@@ -19,7 +19,6 @@ Imports:
     readr,
     lubridate,
     caret,
-    MplusAutomation,
     stringi,
 Suggests:
     stringr
