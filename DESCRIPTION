@@ -17,7 +17,7 @@ Imports:
     purrr,
     lubridate,
     caret,
-    stringi,
+    tidyselect
 Suggests:
     stringr,
     testthat

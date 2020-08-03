@@ -36,7 +36,7 @@ dummy_code <- function(.data) {
   noms <-
     sapply(.data, function(col) {
       is.factor(col) & !is.ordered(col) &
-        length(na.omit(unique(col))) > 2
+        length(stats::na.omit(unique(col))) > 2
     })
 
   if (!any(noms)) {
@@ -73,9 +73,9 @@ dummy_code <- function(.data) {
 #'   Default is `maxlev`.
 #' @return data frame with same columns
 #'
-#' @export
 #' @import dplyr
 #'
+#' @export
 #' @family data munging
 #'
 #' @examples
@@ -87,8 +87,8 @@ dummy_code <- function(.data) {
 #'
 ord_collapse <- function(.data, maxlev = 10, newlev = maxlev) {
   .data %>%
-    mutate(across(
-      where(~is.factor(.) & is.ordered(.) & nlevels(.) > maxlev),
+    mutate(across(tidyselect::vars_select_helpers$where(
+      ~is.factor(.) & is.ordered(.) & nlevels(.) > maxlev),
       ~cut(as.integer(levels(.))[.], newlev, labels = 1:newlev,
            ordered_result = TRUE)
     ))
