@@ -12,14 +12,13 @@ Depends:
     R (>= 2.10)
 Imports:
     stats,
-    usethis,
     dplyr,
     rlang,
     purrr,
-    readr,
     lubridate,
     caret,
     stringi,
 Suggests:
-    stringr
+    stringr,
+    testthat
 RoxygenNote: 7.1.1
