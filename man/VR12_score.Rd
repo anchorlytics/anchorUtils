@@ -23,8 +23,6 @@ tibble with new column, either "PCS" or "MCS"
 }
 \description{
 Given a tibble with VR12 item scores, add a column for component VR12 scores.
-}
-\details{
 If there is any missing data, imputation should be performed prior to this.
 }
 \examples{
@@ -35,7 +33,8 @@ VR12_score(data.frame(
   dplyr::everything(), "PCS")
 
 }
-\author{
-Sean Ho <anchor@seanho.com>
+\seealso{
+Other VR12 utilities: 
+\code{\link{VR12_scale}()}
 }
-\concept{VR12}
+\concept{VR12 utilities}

@@ -9,10 +9,10 @@ ord_collapse(.data, maxlev = 10, newlev = maxlev)
 \arguments{
 \item{.data}{data frame with ordinal factors coded as integers}
 
-\item{maxlev}{apply level collapsing only if `nlevels` is greater than this}
+\item{maxlev}{apply level collapsing only if \code{nlevels} is greater than this}
 
 \item{newlev}{if collapsing levels, how many levels should the factor have.
-Default is `maxlev`.}
+Default is \code{maxlev}.}
 }
 \value{
 data frame with same columns
@@ -20,24 +20,21 @@ data frame with same columns
 \description{
 Polychoric correlation routines often limit the number of levels an
 ordinal (ordered categorical) factor can have.
-This function is like [forcats::fct_collapse()] but preserves the ordering
-of levels.
+This function is like \code{\link[forcats:fct_collapse]{forcats::fct_collapse()}}
+but preserves the ordering of levels.
 Modified factors are releveled to 1:n.
 }
 \examples{
 library(dplyr)
-as_tibble(mtcars) \%>\%
-  mutate_at(c("cyl", "vs", "am", "gear", "carb"), as.ordered) \%>\%
-  mutate_at("disp", as.ordered) \%>\%
+mtcars \%>\%
+  mutate(across(c("cyl", "vs", "am", "gear", "carb", "disp"), as.ordered)) \%>\%
   ord_collapse() \%>\%
   summarise_all(nlevels)
+
 }
 \seealso{
 Other data munging: 
 \code{\link{drop_nzv}()},
 \code{\link{dummy_code}()}
-}
-\author{
-Sean Ho <anchor@seanho.com>
 }
 \concept{data munging}

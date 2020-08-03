@@ -9,10 +9,10 @@ save_all(.list, rdsdir = NULL, ...)
 \arguments{
 \item{.list}{character vector of names of objects in environment}
 
-\item{rdsdir}{path to directory, passed to [base::file.path()].
-If not specified, [base::tempdir()].}
+\item{rdsdir}{path to directory, passed to \code{\link[base:file.path]{base::file.path()}}.
+If not specified, \code{\link[base:tempfile]{base::tempdir()}}.}
 
-\item{...}{additional options passed to [base::saveRDS()]}
+\item{...}{additional options passed to \code{\link[base:readRDS]{base::saveRDS()}}}
 }
 \value{
 None, global environment is modified
@@ -20,6 +20,10 @@ None, global environment is modified
 \description{
 Save multiple objects as RDS files
 }
+\section{DEPRECATED}{
+Obsoleted by \link{drake} caching
+}
+
 \examples{
 # Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
 my_mtcars <- mtcars; my_letters <- letters
@@ -28,10 +32,7 @@ rm(my_mtcars, my_letters)
 read_all(c("my_mtcars", "my_letters"))
 }
 \seealso{
-Other Saving/loading data: 
+Other saving/loading data: 
 \code{\link{read_all}()}
 }
-\author{
-Sean Ho <anchor@seanho.com>
-}
-\concept{Saving/loading data}
+\concept{saving/loading data}

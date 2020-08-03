@@ -17,8 +17,8 @@ Dummy coding expands a polytomous categorical factor into several
 indicator variables, each of which is logical (Boolean, TRUE/FALSE).
 }
 \details{
-The one-hot contrast expands a factor with `L` levels into `L` indicator
-variables.  The result is not a full-rank parameterisation,
+The one-hot contrast expands a factor with \code{L} levels into \code{L}
+indicator variables.  The result is not a full-rank parameterisation,
 however it avoids needing to select a reference level.
 
 Ordinal (ordered categorical) and dichotomous (only 2 levels) variables are
@@ -29,19 +29,21 @@ actual data, rather than the factor levels.
 
 The new indicator variables are appended to the end of the variable list,
 and the original factors are removed.
-
-TODO (BUG): if only one factor in tibble, it is renamed "data"
 }
+\section{TODO}{
+\itemize{
+\item if .data has only one factor, it is renamed "data"
+}
+}
+
 \examples{
 library(dplyr)
-mutate_at(mtcars, c("cyl", "gear"), as.factor) \%>\% dummy_code()
+mtcars \%>\% mutate(across(c("cyl", "gear"), as.factor)) \%>\% dummy_code()
+
 }
 \seealso{
 Other data munging: 
 \code{\link{drop_nzv}()},
 \code{\link{ord_collapse}()}
-}
-\author{
-Sean Ho <anchor@seanho.com>
 }
 \concept{data munging}

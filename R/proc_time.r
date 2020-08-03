@@ -1,12 +1,12 @@
 #' Pretty-print a proc_time object
 #'
-#' TODO: replace purrr with lapply
+#' @details # TODO
+#' + replace purrr with lapply
 #'
-#' @param .pt A proc_time object, e.g., from \code{\link[base]{system.time}}
+#' @param .pt A proc_time object, e.g., from [base::system.time()]
 #' @return A formatted string.
 #'
 #' @export
-#' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples
 #' fmt.proc_time(system.time(rnorm(1e7)))

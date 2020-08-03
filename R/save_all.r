@@ -2,6 +2,9 @@
 
 #' @title Save multiple objects as RDS files
 #'
+#' @details # DEPRECATED
+#' Obsoleted by drake caching
+#'
 #' @param .list character vector of names of objects in environment
 #' @param rdsdir path to directory, passed to [base::file.path()].
 #'   If not specified, [base::tempdir()].
@@ -9,8 +12,7 @@
 #' @return None, global environment is modified
 #'
 #' @export
-#' @family Saving/loading data
-#' @author Sean Ho <anchor@seanho.com>
+#' @family saving/loading data
 #'
 #' @examples
 #' # Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
@@ -30,6 +32,9 @@ save_all <- function(.list, rdsdir = NULL, ...) {
 
 #' Load multiple RDS files into current environment
 #'
+#' @details # DEPRECATED
+#' Obsoleted by [drake::loadd()]
+#'
 #' @param .list character vector of names
 #' @param rdsdir path to directory, passed to [base::file.path()].
 #'   If not specified, [base::tempdir()].
@@ -37,7 +42,7 @@ save_all <- function(.list, rdsdir = NULL, ...) {
 #' @return None, global environment is modified
 #'
 #' @export
-#' @family Saving/loading data
+#' @family saving/loading data
 #' @author Sean Ho <anchor@seanho.com>
 #'
 #' @examples

@@ -7,18 +7,21 @@
 fmt.proc_time(.pt)
 }
 \arguments{
-\item{.pt}{A proc_time object, e.g., from [base::system.time()]}
+\item{.pt}{A proc_time object, e.g., from \code{\link[base:system.time]{base::system.time()}}}
 }
 \value{
 A formatted string.
 }
 \description{
-TODO: replace purrr with lapply
+Pretty-print a proc_time object
 }
+\section{TODO}{
+\itemize{
+\item replace purrr with lapply
+}
+}
+
 \examples{
 fmt.proc_time(system.time(rnorm(1e7)))
 
-}
-\author{
-Sean Ho <anchor@seanho.com>
 }

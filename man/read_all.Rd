@@ -9,10 +9,10 @@ read_all(.list, rdsdir = NULL, ...)
 \arguments{
 \item{.list}{character vector of names}
 
-\item{rdsdir}{path to directory, passed to [base::file.path()].
-If not specified, [base::tempdir()].}
+\item{rdsdir}{path to directory, passed to \code{\link[base:file.path]{base::file.path()}}.
+If not specified, \code{\link[base:tempfile]{base::tempdir()}}.}
 
-\item{...}{additional options passed to [base::readRDS()]}
+\item{...}{additional options passed to \code{\link[base:readRDS]{base::readRDS()}}}
 }
 \value{
 None, global environment is modified
@@ -20,6 +20,10 @@ None, global environment is modified
 \description{
 Load multiple RDS files into current environment
 }
+\section{DEPRECATED}{
+Obsoleted by \code{\link[drake:readd]{drake::loadd()}}
+}
+
 \examples{
 # Saves/loads files "mtcars.rds" and "letters.rds" in tmpdir
 my_mtcars <- mtcars; my_letters <- letters
@@ -28,10 +32,10 @@ rm(my_mtcars, my_letters)
 read_all(c("my_mtcars", "my_letters"))
 }
 \seealso{
-Other Saving/loading data: 
+Other saving/loading data: 
 \code{\link{save_all}()}
 }
 \author{
-Sean Ho <anchor@seanho.com>
+Sean Ho \href{mailto:anchor@seanho.com}{anchor@seanho.com}
 }
-\concept{Saving/loading data}
+\concept{saving/loading data}

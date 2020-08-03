@@ -3,25 +3,34 @@
 \name{VR12_scale}
 \alias{VR12_scale}
 \title{Scale VR12 items}
+\source{
+\href{https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas}{SAS script}
+}
 \usage{
 VR12_scale(.data)
 }
 \arguments{
-\item{.data}{tibble with VR12 items on 1-based integer scale}
+\item{.data}{tibble with at least the following columns:
+GH1, PF2, PF4, RP2, RP3, RE2, RE3, BP2, MH3, VT2, MH4, SF2,
+with values 1:n.  The columns do not need to be in this order, but do
+need to be named exactly this.}
 }
 \value{
-tibble with VR12 items on 0 to 100 scale
+tibble with same columns, but VR12 items scaled to 0-100.
 }
 \description{
 Given a tibble with columns named according to the VR12 items,
-scale them from original Likert to a 0 to 100 scale.
-}
-\details{
-Taken from a [SAS script](https://healthcaredelivery.cancer.gov/seer-mhos/program/pcs_mcs_score.sas) for SF12.
+scale them from original 1-based Likert to a 0 to 100 scale.
+Reverse-coding of items is handled here.
 }
 \examples{
 anchorUtils:::VR12_scale(data.frame(
-  GH1 = 2:3, PF2 = 0:1, PF4 = 0:1, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
-  RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 0:1, SF2 = 0:1))
+  GH1 = 2:3, PF2 = 1:2, PF4 = 1:2, RP2 = 2:3, RP3 = 2:3, RE2 = 2:3,
+  RE3 = 2:3, BP2 = 2:3, MH3 = 2:3, VT2 = 2:3, MH4 = 1:2, SF2 = 1:2))
 
 }
+\seealso{
+Other VR12 utilities: 
+\code{\link{VR12_score}()}
+}
+\concept{VR12 utilities}

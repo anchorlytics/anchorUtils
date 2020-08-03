@@ -10,22 +10,22 @@ which_names(.a, dimnames = NULL, ...)
 \item{.a}{array}
 
 \item{dimnames}{list of character vectors.
-E.g., if `.a` is a matrix, then `length(dimnames) == 2`,
-`dimnames[[1]]` is a vector of row names, and
-`dimnames[[2]]` is a vector of column names.}
+E.g., if \code{.a} is a matrix, then \code{length(dimnames) == 2},
+\code{dimnames[[1]]} is a vector of row names, and
+\code{dimnames[[2]]} is a vector of column names.}
 
-\item{...}{Additional options passed to [base::which()].}
+\item{...}{Additional options passed to \code{\link[base:which]{base::which()}}.}
 }
 \value{
 a data frame of named indices
 }
 \description{
-[base::which()] returns numeric indices of TRUE entries in an array.
-This wrapper uses `dimnames` to return pairs of row/column names.
+\code{\link[base:which]{base::which()}} returns numeric indices of TRUE entries in an array.
+This wrapper uses \code{dimnames} to return pairs of row/column names.
 }
 \details{
 This was originally created to examine correlation matrices for collinearity.
-Then I discovered [corrr::stretch()] and that was much better.
+Then I discovered \code{\link[corrr:stretch]{corrr::stretch()}} and that was much better.
 }
 \examples{
 which_names(mtcars[1:6, c("vs", "am")] == 1)
