@@ -3,6 +3,7 @@
 export(VR12_score)
 export(drop_nzv)
 export(dummy_code)
+export(duplicates)
 export(fmt.proc_time)
 export(ord_collapse)
 export(read_all)

@@ -21,7 +21,7 @@ None, global environment is modified
 Load multiple RDS files into current environment
 }
 \section{DEPRECATED}{
-Obsoleted by \code{\link[drake:readd]{drake::loadd()}}
+Obsoleted by \code{\link[drake:loadd]{drake::loadd()}}
 }
 
 \examples{
