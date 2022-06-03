@@ -1,3 +1,5 @@
+# anchorUtils 0.7.0
+
 + Import helper function for `Amelia` imputation
 
 # anchorUtils 0.6.0
