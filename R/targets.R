@@ -4,6 +4,8 @@
 #' @param ... other args passed to [targets::tar_meta()]
 #' @return single char string, formatted duration
 #'
+#' @import dplyr
+#'
 #' @export
 #' @family target helpers
 #'

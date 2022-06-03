@@ -9,6 +9,18 @@
     ]
   },
   "Packages": {
+    "Amelia": {
+      "Package": "Amelia",
+      "Version": "1.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "18c00d1b714e70968b69a7d88f55a616",
+      "Requirements": [
+        "Rcpp",
+        "RcppArmadillo",
+        "foreign"
+      ]
+    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-20",
@@ -70,6 +82,16 @@
       "Hash": "32e79b908fda56ee57fe518a8d37b864",
       "Requirements": []
     },
+    "RcppArmadillo": {
+      "Package": "RcppArmadillo",
+      "Version": "0.11.1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "631929e53829901562986c504f86104b",
+      "Requirements": [
+        "Rcpp"
+      ]
+    },
     "SQUAREM": {
       "Package": "SQUAREM",
       "Version": "2021.1",
@@ -88,6 +110,14 @@
         "sys"
       ]
     },
+    "backports": {
+      "Package": "backports",
+      "Version": "1.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c39fbec8a30d23e721980b8afb31984c",
+      "Requirements": []
+    },
     "base64enc": {
       "Package": "base64enc",
       "Version": "0.1-3",
@@ -95,6 +125,16 @@
       "Repository": "CRAN",
       "Hash": "543776ae6848fde2f48ff3816d0628bc",
       "Requirements": []
+    },
+    "base64url": {
+      "Package": "base64url",
+      "Version": "1.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0c54cf3a08cc0e550fbd64ad33166143",
+      "Requirements": [
+        "backports"
+      ]
     },
     "bit": {
       "Package": "bit",
@@ -399,6 +439,14 @@
         "iterators"
       ]
     },
+    "foreign": {
+      "Package": "foreign",
+      "Version": "0.8-82",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "32b25c97ce306a760c4d9f787991b5d9",
+      "Requirements": []
+    },
     "fs": {
       "Package": "fs",
       "Version": "1.5.2",
@@ -591,6 +639,18 @@
         "jsonlite",
         "mime",
         "openssl"
+      ]
+    },
+    "igraph": {
+      "Package": "igraph",
+      "Version": "1.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "820595efd173f9bac4ea76c1be007299",
+      "Requirements": [
+        "Matrix",
+        "magrittr",
+        "pkgconfig"
       ]
     },
     "ini": {
@@ -1223,6 +1283,30 @@
       "Hash": "90b28393209827327de889f49935140a",
       "Requirements": [
         "cpp11"
+      ]
+    },
+    "targets": {
+      "Package": "targets",
+      "Version": "0.12.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "197fd95f9f9c6ac7e0be2d0ffbdd932f",
+      "Requirements": [
+        "R6",
+        "base64url",
+        "callr",
+        "cli",
+        "codetools",
+        "data.table",
+        "digest",
+        "igraph",
+        "knitr",
+        "rlang",
+        "tibble",
+        "tidyselect",
+        "vctrs",
+        "withr",
+        "yaml"
       ]
     },
     "testthat": {

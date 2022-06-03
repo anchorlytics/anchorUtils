@@ -18,7 +18,8 @@ Imports:
     lubridate,
     caret,
     tidyselect,
-    targets
+    targets,
+    Amelia
 Suggests:
     stringr,
     testthat

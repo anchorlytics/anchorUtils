@@ -1,3 +1,5 @@
++ Import helper function for `Amelia` imputation
+
 # anchorUtils 0.6.0
 
 + Added helper to pretty-print computation time of targets: `tgt_time()`
